@@ -12,6 +12,9 @@ Visual
 :Home: `Labase <http://labase.selfip.org/>`__
 :Copyright: 2013, `GPL <http://is.gd/3Udt>`__.
 """
+
+import random
+
 RAIO = 5
 M_EXT = 25
 M_INT = 10
@@ -25,6 +28,13 @@ ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 
 LARGURA = 800
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
+
+COLORS = ["red",
+			"green",
+			"blue",
+			"#696969", #cinza
+			"#EEB422", #amarelo 
+			"#CD00CD"] #magenta
 
 
 def main(doc):
@@ -55,7 +65,7 @@ class Visual:
                                  x + M_INT + (CASA+SEP)*(c%PEC_H),
                                  y + M_INT + (CASA+SEP)*(c//PEC_H), "Gainsboro") for c in range(PEC_H * PEC_V)]
 								 
-		pecas = [self.build_peca(casa) for casa in casas]
+		#pecas = [self.build_peca(casa) for casa in casas]
 								 
 		return casas
 		
@@ -96,13 +106,19 @@ class Visual:
 	
 	def build_peca(self, casa):
 		""" """
-		peca=self.gui.ellipse(cx=10 , cy=10, ry=10,rx=10,fill="red")
-		casa <= peca
+		peca=self.gui.ellipse(cx=CASA//2 , cy=CASA//2, ry=10,rx=10,fill=COLORS[random.randint(0,6)])
+		g = self.gui.g()
+		g <= peca
+		casa <= g
+		return g
 		
 	def build_mao(self, mao):
 		""" """
 		
-		mao=self.gui.rect(x=700, y=M_EXT, width=CASA, height=CASA,rx = RAIO,fill="DodgerBlue")
-		self.canvas <= mao
+		mao=self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx = RAIO,fill="DodgerBlue")
+		g = self.gui.g(transform = "translate(%d %d)"%(700,M_EXT))
+		g <= mao
+		self.canvas <= g
+		return g
 								 
 		
