@@ -37,9 +37,6 @@ COLORS = ["red",
 			"#CD00CD"] #magenta
 
 
-def main(doc):
-  print('Quarto 0.1.0')
-
 class Visual:
 	"""Classe responsavel por desenhar o tabuleiro do jogo"""
 	
@@ -69,10 +66,10 @@ class Visual:
 								 
 		return casas
 		
-	def build_casa(self,lugar,x,y, cor):
+	def build_casa(self,lugar,x,y, cor, tipo=None, id=None):
 		"""Desenha uma casa no tabuleiro"""
 		
-		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=0,fill=cor)
+		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=0,fill=cor, id="rect")
 		g = self.gui.g(transform = "translate(%d %d)"%(x,y))
 		g <= casa
 		lugar <= g
@@ -98,19 +95,33 @@ class Visual:
 		# Criando as casas vazias
 		casas = [self.build_casa(self.canvas,
                                  x + M_INT + (CASA+SEP)*(c%13),
-                                 y + (3*CASA+SEP)*(c//13), "Gainsboro" ) for c in range(26)]
+                                 y + (3*CASA+SEP)*(c//13), "Gainsboro","alvo",c) for c in range(26)]
 								 
 								 
 		return casas
 		
 	
-	def build_peca(self, casa):
+	def build_peca(self, casa, id):
 		""" """
-		peca=self.gui.ellipse(cx=CASA//2 , cy=CASA//2, ry=10,rx=10,fill=COLORS[random.randint(0,6)])
-		g = self.gui.g()
+		peca=self.gui.ellipse(cx=CASA//2 , cy=CASA//2, ry=10,rx=10,fill=COLORS[random.randint(0,6)], id="p" + str(id), draggable=True)
+		g = self.gui.g(draggable=True, id="gp" + str(id))
+		g.onmouseover = self.muda_peca
+		g.ondragstart = self.drag_start
+		
 		g <= peca
 		casa <= g
 		return g
+		
+	def muda_peca(self, event):
+		#print('muda')
+		#self.casa_visual.fill = "red"
+		event.target.style.cursor = "pointer"
+		
+	def drag_start(self, ev):
+		ev.data['id_peca']=ev.target.id
+		print(ev.target.id)
+		ev.data.effectAllowed = 'move'
+    
 		
 	def build_mao(self, mao):
 		""" """
