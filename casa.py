@@ -29,15 +29,17 @@ class Casa:
 		
 	def drop(self, event):
 		print('drop')
+		event.preventDefault()
 		
 		id_peca = event.data['id_peca']
 		
 		casa_atual = self.map_pecas['g' + id_peca]
 		
 		if self.peca is not None:
+			if self.peca.id != casa_atual.peca.id :
 				self.troca_peca(self, casa_atual)
 		else:
-				self.pega_peca(casa_atual)
+			self.pega_peca(casa_atual)
 		
 		
 	def pega_peca(self, casa):

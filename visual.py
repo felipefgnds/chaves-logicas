@@ -3,17 +3,12 @@
 Visual
 ############################################################
 
-:Author: *Carlo E. T. Oliveira*
-:Author: *Kyle Kuo*
-:Contact: carlo@nce.ufrj.br
-:Date: 2013/04/09
-:Status: This is a "work in progress"
-:Revision: 0.1.1
-:Home: `Labase <http://labase.selfip.org/>`__
-:Copyright: 2013, `GPL <http://is.gd/3Udt>`__.
+:Author: *Felipe Fagundes*
+
 """
 
 import random
+#from html import DIV
 
 RAIO = 5
 M_EXT = 25
@@ -103,33 +98,26 @@ class Visual:
 	
 	def build_peca(self, casa, id):
 		""" """
-		peca=self.gui.ellipse(cx=CASA//2 , cy=CASA//2, ry=10,rx=10,fill=COLORS[random.randint(0,6)], id="p" + str(id), draggable=True)
+		#peca=self.gui.ellipse(cx=CASA//2, cy=CASA//2, ry=10,rx=10,
+		#						fill=COLORS[random.randint(0,6)], id="p" + str(id), draggable=True)
+								
+		peca=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".jpg", draggable=True)
+		#peca = DIV("DIV",draggable=True,id="p" + str(id))
+		#peca.style = {'width':'40px', 'height':'40px', 'background-color':'red'}
 		g = self.gui.g(draggable=True, id="gp" + str(id))
-		g.onmouseover = self.muda_peca
+		g.onmouseover = self.aponta_peca
 		g.ondragstart = self.drag_start
 		
 		g <= peca
 		casa <= g
 		return g
 		
-	def muda_peca(self, event):
-		#print('muda')
-		#self.casa_visual.fill = "red"
+	def aponta_peca(self, event):
 		event.target.style.cursor = "pointer"
 		
-	def drag_start(self, ev):
-		ev.data['id_peca']=ev.target.id
-		print(ev.target.id)
-		ev.data.effectAllowed = 'move'
-    
-		
-	def build_mao(self, mao):
-		""" """
-		
-		mao=self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx = RAIO,fill="DodgerBlue")
-		g = self.gui.g(transform = "translate(%d %d)"%(700,M_EXT))
-		g <= mao
-		self.canvas <= g
-		return g
+	def drag_start(self, event):
+		event.data['id_peca']=event.target.id
+		print(event.target.id)
+		event.data.effectAllowed = 'move'
 								 
 		
