@@ -11,7 +11,6 @@ class Casa:
 		self.casa_visual = casa_visual
 		self.map_pecas = map_pecas
 		self.peca=None
-		#self.casa_visual.onclick = self.manda_peca
 		
 		if tipo=="alvo" :
 			self.casa_visual.ondragover = self.drag_over
@@ -28,11 +27,11 @@ class Casa:
 		event.target.style.cursor = "crosshair"
 		
 	def drop(self, event):
-		print('drop')
+		
 		event.preventDefault()
 		
 		id_peca = event.data['id_peca']
-		
+		print('drop ' + id_peca)
 		casa_atual = self.map_pecas['g' + id_peca]
 		
 		if self.peca is not None:
@@ -44,6 +43,8 @@ class Casa:
 		
 	def pega_peca(self, casa):
 		print('pega peca')
+		
+		altera_coordenadas(casa.peca,self.casa_visual.x,self.casa_visual.y)
 		self.casa_visual <= casa.peca
 		id_peca = casa.peca.id
 		self.map_pecas[id_peca] = self
@@ -55,13 +56,21 @@ class Casa:
 		aux = casa1.peca
 		casa1.peca = None
 		casa1.peca = casa2.peca
+		altera_coordenadas(casa2.peca, casa1.casa_visual.x, casa1.casa_visual.y)
 		casa1.casa_visual <= casa2.peca
 		self.map_pecas[casa2.peca.id] = casa1
 		
 		casa2.peca = None
 		casa2.peca = aux
+		altera_coordenadas(aux, casa2.casa_visual.x, casa2.casa_visual.y)
 		casa2.casa_visual <= aux
 		self.map_pecas[aux.id] = casa2
+		
+	def altera_coordenadas(peca,x,y):
+		peca.firstChild.firstChild.attributes.getNamedItem("x").nodeValue=x
+		peca.firstChild.firstChild.attributes.getNamedItem("y").nodeValue=y
+		peca.attributes.getNamedItem("transform").nodeValue = "translate(-" + x + ", -" + y + ")"
+		
 		
 	
 		

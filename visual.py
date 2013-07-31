@@ -8,14 +8,13 @@ Visual
 """
 
 import random
-#from html import DIV
 
 RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 8
-PEC_V = 3
+PEC_H = 10
+PEC_V = 5
 CASA = 40
 
 ALTURA_ALVOS = 2*M_INT + 5*CASA + 2*SEP
@@ -24,12 +23,7 @@ ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 LARGURA = 800
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
 
-COLORS = ["red",
-			"green",
-			"blue",
-			"#696969", #cinza
-			"#EEB422", #amarelo 
-			"#CD00CD"] #magenta
+LETRAS = ["A", "B", "C"]
 
 
 class Visual:
@@ -57,15 +51,14 @@ class Visual:
                                  x + M_INT + (CASA+SEP)*(c%PEC_H),
                                  y + M_INT + (CASA+SEP)*(c//PEC_H), "Gainsboro") for c in range(PEC_H * PEC_V)]
 								 
-		#pecas = [self.build_peca(casa) for casa in casas]
 								 
 		return casas
 		
 	def build_casa(self,lugar,x,y, cor, tipo=None, id=None):
 		"""Desenha uma casa no tabuleiro"""
 		
-		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=0,fill=cor, id="rect")
-		g = self.gui.g(transform = "translate(%d %d)"%(x,y))
+		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=0,fill=cor)
+		g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
 		g <= casa
 		lugar <= g
 		return g	
@@ -85,6 +78,9 @@ class Visual:
                                  x + M_INT + (CASA+SEP)*(c%13),
                                  y + M_INT + (3*CASA+SEP)*(c//13), "Plum") for c in range(26)]
 								 
+		for casa in letras:
+			build_letra(self,casa,LETRAS[random.randint(0,3)])
+								 
 		y = y + M_INT + CASA + SEP
 								 
 		# Criando as casas vazias
@@ -98,17 +94,14 @@ class Visual:
 	
 	def build_peca(self, casa, id):
 		""" """
-		#peca=self.gui.ellipse(cx=CASA//2, cy=CASA//2, ry=10,rx=10,
-		#						fill=COLORS[random.randint(0,6)], id="p" + str(id), draggable=True)
 								
-		peca=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".jpg", draggable=True)
-		#peca = DIV("DIV",draggable=True,id="p" + str(id))
-		#peca.style = {'width':'40px', 'height':'40px', 'background-color':'red'}
-		g = self.gui.g(draggable=True, id="gp" + str(id))
-		g.onmouseover = self.aponta_peca
-		g.ondragstart = self.drag_start
-		
-		g <= peca
+		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".jpg", draggable=True)
+		g = self.gui.g(id="gp" + str(id), transform="translate(-" + casa.x + ", -" + casa.y + ")")
+		g_auxiliar = self.gui.g()
+		g_auxiliar.onmouseover = self.aponta_peca
+		g_auxiliar.ondragstart = self.drag_start
+		g_auxiliar <= peca
+		g <= g_auxiliar
 		casa <= g
 		return g
 		
@@ -116,8 +109,20 @@ class Visual:
 		event.target.style.cursor = "pointer"
 		
 	def drag_start(self, event):
-		event.data['id_peca']=event.target.id
+		event.data["id_peca"]=event.target.id
 		print(event.target.id)
-		event.data.effectAllowed = 'move'
+		event.data.effectAllowed = "move"
+		
+		
+	def build_letra(self, casa, letra):
+		""" """					
+		imagem=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".png", draggable=False)
+		g = self.gui.g()
+		g.ondragstart = self.no_drag
+		g <= imagem
+		casa <= g
+		
+	def no_drag(self, event):
+		event.data.effectAllowed = "none"
 								 
 		
