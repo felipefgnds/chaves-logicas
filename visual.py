@@ -13,8 +13,8 @@ RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 10
-PEC_V = 5
+PEC_H = 5
+PEC_V = 4
 CASA = 40
 
 ALTURA_ALVOS = 2*M_INT + 5*CASA + 2*SEP
@@ -34,22 +34,28 @@ LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 class Visual:
 	"""Classe responsavel por desenhar o tabuleiro do jogo"""
 	
-	def __init__(self,doc,gui):
+	def __init__(self,doc,gui,nivel):
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
 		self.canvas=gui.svg(width=LARGURA,height=ALTURA)
 		doc["main"] <= self.canvas
 		
+		if nivel==1 or nivel==3:
+			self.rx = 0
+		else : 
+			if nivel==5 :
+				self.rx=20
+		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
-		base=self.gui.rect(x=0, y= 0, width=LARGURA, height=ALTURA,rx = RAIO,fill="PaleTurquoise")
+		base=self.gui.rect(x=0, y= 0, width=LARGURA, height=ALTURA,rx=RAIO,fill="PaleTurquoise")
 		self.canvas <= base
 	
 	def build_inventario(self,gui):
 		"""Desenha o inventario no tabuleiro. O inventario e o local onde ficam as pecas no inicio do jogo"""
 		x = M_EXT
 		y = ALTURA_ALVOS + 2*CASA
-		tabuleiro=self.gui.rect(x=x, y=y, width=PEC_H*(CASA+SEP)+2*M_INT, height=ALTURA_INVENTARIO,rx = RAIO,fill="DodgerBlue")
+		tabuleiro=self.gui.rect(x=x, y=y, width=PEC_H*(CASA+SEP)+2*M_INT, height=ALTURA_INVENTARIO,rx =self.rx,fill="DodgerBlue")
 		self.canvas <= tabuleiro
 
 		casas = [self.build_casa(self.canvas,
@@ -76,7 +82,7 @@ class Visual:
 	def build_casa(self,lugar,x,y, cor, tipo=None, id=None):
 		"""Desenha uma casa no tabuleiro"""
 		
-		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=0,fill=cor)
+		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=self.rx,fill=cor)
 		g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
 		g <= casa
 		lugar <= g
@@ -89,7 +95,7 @@ class Visual:
 		# Criando a base dos alvos
 		x = M_EXT
 		y = M_EXT
-		alvos=self.gui.rect(x=x, y=y, width=13*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx = RAIO,fill="DodgerBlue")
+		alvos=self.gui.rect(x=x, y=y, width=13*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx =self.rx,fill="DodgerBlue")
 		self.canvas <= alvos
 
 		# Criando as casas das letras

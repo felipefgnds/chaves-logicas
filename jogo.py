@@ -14,7 +14,7 @@ class Jogo:
 		"""Constroi as partes do Jogo. """
 		self.build_base(gui)
 		
-		if nivel==1 :
+		if nivel==1 or nivel==5 :
 			self.build_inventario(gui)
 			self.build_alvos(gui)
 		
@@ -81,5 +81,5 @@ class Jogo:
  
 def main(doc,gui,nivel):
   print('Chaves Logicas')
-  Jogo(Visual(doc,gui),nivel)
+  Jogo(Visual(doc,gui,nivel),nivel)
 
