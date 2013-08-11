@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="brython/brython.js"></script>
+<script type="text/python" src="jogo.py"></script>
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<script type="text/python">
+import svg
+main(doc,svg,1)
+</script>
+</head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="application/xml;charset=utf-8" />
+
+<body onLoad="brython(1)">
+	<div class="barra-lateral">
+		<div class="barra-lateral">
+			<a href="/index.html">- Inicial</a>
+			<br/>
+			<a href="/cadastro.html">- Cadastro</a>
+		</div>
+		
+		<a href="/nivel3.html">
+		<div class="barra-lateral">
+			<img src="/img/ok.png" width="20px" height="20px"> Terminei e acho que estou certo
+		</div>
+		</a>
+		
+		<a href="/nivel3.html">
+		<div class="barra-lateral">
+			<img src="/img/ok.png" width="20px" height="20px"> Terminei, mas acho que está errado	
+		</div>
+		</a>
+		
+		<a href="/index.html">
+		<div class="barra-lateral">
+			<img src="/img/nok.png" width="20px" height="20px"> Desisto!
+		</div>
+		</a>
+	</div>
+	
+	<div id="main"></div>
+	
+</body>
+</html>
+

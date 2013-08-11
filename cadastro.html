@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Cadastro</title>
+</head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="application/xml;charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<style type="text/css">
+form{
+	text-align:left;
+	margin-left:200px;
+}
+
+label {
+    float: left;
+    width: 90px;
+}
+
+</style>
+
+<body>
+
+	<form action="/nivel1.html" method="GET">
+		<b>Cadastro do Jogador</b>
+		<br/><br/>
+		<label>Nome:</label> <input type="text" id="nome" name="nome"/>
+		<br/><br/>
+		<label>Idade:</label> <select name="idade" id="idade" />
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+			</select> anos
+		<br/><br/>
+		<label>Gênero:</label> <select name="genero" id="genero" />
+					<option value="M">Masculino</option>
+					<option value="F">Feminino</option>
+				</select>
+		<br/><br/>
+		<label>Escola:</label> <select name="escola" id="escola" />
+					<option value="PUBLICA">Pública</option>
+					<option value="PRIVADA">Privada</option>
+				</select>
+		<br/><br/>
+		<label>Ano escolar:</label> <select name="ano_escolar" id="ano_escolar" />
+					<option value="1">1º</option>
+					<option value="2">2º</option>
+					<option value="3">3º</option>
+					<option value="4">4º</option>
+					<option value="5">5º</option>
+					<option value="6">6º</option>
+					<option value="7">7º</option>
+					<option value="8">8º</option>
+					<option value="9">9º</option>
+				</select> ano.
+		<br/><br/>
+		<label>Educação:</label> <select name="educacao" id="educacao" />
+					<option value="REGULAR">Regular</option>
+					<option value="ESPECIAL">Especial</option>
+				</select>
+		<br/><br/>
+		<label>Caso:</label> <select name="tipo_especial" id="tipo_especial" />
+					<option value="1">Deficiência intelectual</option>
+					<option value="2">Transtornos psiquiátricos</option>
+					<option value="3">Deficiência física</option>
+					<option value="4">Neuropatias</option>
+					<option value="5">Internação hospitalar</option>
+					<option value="6">Estimulação precoce</option>
+					<option value="7">Comorbidades</option>
+					<option value="8">Criança em situação de risco</option>
+					<option value="9">Perda auditiva</option>
+					<option value="10">Transtornos neuropsiquiátricos</option>
+				</select>
+		<br/><br/>
+		<label>Outros:</label> <input type="text" id="outros" name="outros"/>
+		<br/><br/>
+		<input type="submit" value="CADASTRAR">
+	</form>
+</body>
+</html>

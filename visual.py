@@ -20,10 +20,15 @@ CASA = 40
 ALTURA_ALVOS = 2*M_INT + 5*CASA + 2*SEP
 ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 
+CASAS_GRID_H = 16
+CASAS_GRID_V = 10
+ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA
+
 LARGURA = 800
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
 
-LETRAS = ["A", "B", "C"]
+LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
+			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 
 class Visual:
@@ -54,6 +59,20 @@ class Visual:
 								 
 		return casas
 		
+	def build_deck(self,gui):
+		"""Desenha o deck no tabuleiro. O deck e o local onde ficam as pecas no nivel 3"""
+		x = M_EXT
+		y = ALTURA_GRID + CASA
+		deck=self.gui.rect(x=x, y=y, width=CASAS_GRID_H*(CASA+SEP)+2*M_INT, height=CASA+2*M_INT,rx = RAIO,fill="DodgerBlue")
+		self.canvas <= deck
+
+		casas = [self.build_casa(self.canvas,
+									x + M_INT + (CASA+SEP)*(c%CASAS_GRID_H),
+									y + M_INT + (CASA*SEP)*(c//CASAS_GRID_H), "Gainsboro") for c in range(CASAS_GRID_H)]
+								 
+								 
+		return casas
+		
 	def build_casa(self,lugar,x,y, cor, tipo=None, id=None):
 		"""Desenha uma casa no tabuleiro"""
 		
@@ -78,8 +97,8 @@ class Visual:
                                  x + M_INT + (CASA+SEP)*(c%13),
                                  y + M_INT + (3*CASA+SEP)*(c//13), "Plum") for c in range(26)]
 								 
-		for casa in letras:
-			build_letra(self,casa,LETRAS[random.randint(0,3)])
+		for casa,letra in zip(letras, LETRAS):
+			build_letra(self,casa,letra)
 								 
 		y = y + M_INT + CASA + SEP
 								 
@@ -87,6 +106,26 @@ class Visual:
 		casas = [self.build_casa(self.canvas,
                                  x + M_INT + (CASA+SEP)*(c%13),
                                  y + (3*CASA+SEP)*(c//13), "Gainsboro","alvo",c) for c in range(26)]
+								 
+								 
+		return casas
+		
+		
+	def build_grid(self,gui):
+		"""Desenha o grid onde ficam as casas alvos"""
+		
+		# Criando a base invisivel do grid
+		x = M_EXT
+		y = M_EXT
+		alvos=self.gui.rect(x=x, y=y, width=CASAS_GRID_H*CASA+2*M_INT, height=ALTURA_GRID,rx = RAIO,fill="DodgerBlue")
+		self.canvas <= alvos
+								 
+		y = M_EXT + M_INT;
+								 
+		# Criando as casas vazias
+		casas = [self.build_casa(self.canvas,
+                                 x + M_INT + (CASA)*(c%CASAS_GRID_H),
+                                 y + (CASA)*(c//CASAS_GRID_H), "Gainsboro","alvo",c) for c in range(CASAS_GRID_V*CASAS_GRID_H)]
 								 
 								 
 		return casas
@@ -115,7 +154,7 @@ class Visual:
 		
 		
 	def build_letra(self, casa, letra):
-		""" """					
+		""" Desenha as letras"""					
 		imagem=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".png", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
