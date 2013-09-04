@@ -11,7 +11,7 @@ from casa import Casa
 
 class Jogo:
 	def __init__(self, gui, nivel):
-		"""Constroi as partes do Jogo. """
+		"""Constroi as partes do Jogo. q"""
 		self.build_base(gui)
 		
 		if nivel==1 or nivel==5 :
