@@ -1,1 +1,1 @@
-worker: python -m http.server 9080
+web: python webmain.py
