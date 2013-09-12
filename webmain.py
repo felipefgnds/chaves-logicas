@@ -22,11 +22,6 @@ ADM, HEA, PEC, PHA, END = 'adm1n head peca fase fim'.split()
 
 #LIBS = DIR + '../libs/lib'
 IMGS = DIR + '/'
-
-
-@route('/')
-def main():
-        pass
 		
 @route('/hello')
 def hello():
@@ -35,7 +30,7 @@ def hello():
 
 @get('/<filename:re:.*\.html>')
 def html(filename):
-    return static_file(filename)
+    return static_file(filename, '/')
 
 
 @get('/<filename:re:.*\.py>')
