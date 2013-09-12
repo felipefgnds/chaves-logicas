@@ -33,7 +33,7 @@ def hello():
     return "Hello World!"
 
 
-@get('/<name:re:*\.html>')
+@get('/<name>')
 def html(name):
     return static_file(name, root='/')
 
