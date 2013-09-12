@@ -33,10 +33,9 @@ def hello():
     return "Hello World!"
 
 
-@get('/index')
-@view(DIR+'index.html')
-def html():
-    return dict()
+@get('/<filename:re:.*\.html>')
+def html(filename):
+    return static_file(filename, root=DIR)
 
 
 @get('/<filename:re:.*\.py>')
