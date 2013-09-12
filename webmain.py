@@ -30,7 +30,7 @@ def hello():
 
 @get('/<filename:re:.*\.html>')
 def html(filename):
-    return "sorte"
+    return filename
 
 
 @get('/<filename:re:.*\.py>')
