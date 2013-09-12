@@ -33,8 +33,8 @@ def hello():
     return "Hello World!"
 
 
-@get('/index/<name>')
-def html(name):
+@get('/index')
+def html():
     return static_file('index.html', root='/')
 
 
