@@ -33,9 +33,9 @@ def hello():
     return "Hello World!"
 
 
-@get('/<name:re:*.html>')
+@get('/<name:re:*\.html>')
 def html(name):
-    return static_file(name, root=DIR)
+    return static_file(name, root='/')
 
 
 @get('/<filename:re:.*\.py>')
