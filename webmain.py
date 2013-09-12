@@ -28,6 +28,10 @@ IMGS = DIR + 'view/'
 @view(DIR)
 def main():
         pass
+		
+@route('/hello')
+def hello():
+    return "Hello World!"
 
 
 @get('/<filename:re:.*\.html>')
