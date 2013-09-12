@@ -35,7 +35,7 @@ def hello():
 
 @get('/<filename:re:.*\.html>')
 def html(filename):
-    return static_file(filename, root='/')
+    return static_file(filename)
 
 
 @get('/<filename:re:.*\.py>')
