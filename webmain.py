@@ -34,7 +34,7 @@ def hello():
 
 
 @get('/index')
-@view(DIR+'index')
+@view(DIR+'index.html')
 def html():
     return dict()
 
