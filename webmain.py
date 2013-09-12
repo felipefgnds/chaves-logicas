@@ -21,11 +21,10 @@ DIR = os.path.dirname(__file__)+'/'
 ADM, HEA, PEC, PHA, END = 'adm1n head peca fase fim'.split()
 
 #LIBS = DIR + '../libs/lib'
-IMGS = DIR + 'view/'
+IMGS = DIR + '/'
 
 
 @route('/')
-@view(DIR)
 def main():
         pass
 		
@@ -34,9 +33,9 @@ def hello():
     return "Hello World!"
 
 
-@get('/<filename:re:.*\.html>')
-def html(filename):
-    return static_file(filename, root=DIR)
+@get('/<name:re:*.html>')
+def html(name):
+    return static_file(name, root=DIR)
 
 
 @get('/<filename:re:.*\.py>')
