@@ -25,7 +25,7 @@ IMGS = DIR + '/'
 		
 @route('/hello')
 def hello():
-    return "Hello World!"
+    return DIR
 
 
 @get('/<filename:re:.*\.html>')
