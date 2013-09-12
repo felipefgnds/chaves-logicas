@@ -17,8 +17,6 @@ from datetime import datetime
 from bottle import route, view, run, get, post, static_file, request
 import bottle
 import os
-import database
-import json
 DIR = os.path.dirname(__file__)+'/'
 ADM, HEA, PEC, PHA, END = 'adm1n head peca fase fim'.split()
 
@@ -29,11 +27,6 @@ IMGS = DIR + 'view/'
 @route('/')
 @view(DIR+'view/index')
 def main():
-    try:
-        doc_id, doc_rev = database.DRECORD.save({'type': 'Pyndorama', 'date': str(datetime.now())})
-        return dict(doc_id=doc_id)
-    except Exception:
-        return "Error in Database %s" % str([r for r in database.DRECORD])
         pass
 
 
