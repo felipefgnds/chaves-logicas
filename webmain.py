@@ -25,7 +25,7 @@ IMGS = DIR + 'view/'
 
 
 @route('/')
-@view(DIR+'view/index')
+@view(DIR)
 def main():
         pass
 
