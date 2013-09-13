@@ -29,24 +29,15 @@ def hello():
 
 
 @get('/<filename:re:.*\.html>')
-def html(filename):
-    return static_file(filename, root=DIR)
-
-
 @get('/<filename:re:.*\.py>')
-def python(filename):
-    return static_file(filename, root=DIR)
-
-
 @get('/<filename:re:.*\.(jpg|png|gif|ico)>')
-def imagepng(filename):
-    return static_file(filename, root=DIR)
-
-
 @get('/<filename:re:.*\.css>')
-def stylecss(filename):
-    print(filename, IMGS)
+@get('/<filename:re:.*\.js>')
+def file(filename):
     return static_file(filename, root=DIR)
+
+
+
 
 
 
