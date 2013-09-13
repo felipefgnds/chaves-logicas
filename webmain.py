@@ -33,8 +33,12 @@ def file(filename):
 
 @post('/record')
 def record_phase():
-	doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
-	print(doc_id)
+	try:
+		doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
+		print(doc_id)
+	except Exception:
+        return "Error in Database"
+        pass
    """ try:
         json = retrieve_data(request.params)
         record_id = json.keys()[0]
