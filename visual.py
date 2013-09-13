@@ -140,7 +140,7 @@ class Visual:
 	def build_peca(self, casa, id):
 		""" """
 								
-		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".jpg", draggable=True)
+		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".JPG", draggable=True)
 		g = self.gui.g(id="gp" + str(id), transform="translate(-" + casa.x + ", -" + casa.y + ")")
 		g_auxiliar = self.gui.g()
 		g_auxiliar.onmouseover = self.aponta_peca
@@ -161,7 +161,7 @@ class Visual:
 		
 	def build_letra(self, casa, letra):
 		""" Desenha as letras"""					
-		imagem=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".png", draggable=False)
+		imagem=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".PNG", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
 		g <= imagem
