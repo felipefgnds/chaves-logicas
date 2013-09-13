@@ -39,16 +39,6 @@ def record_phase():
 	except Exception:
 		return "Error in Database"
 		pass
-   """ try:
-        json = retrieve_data(request.params)
-        record_id = json.keys()[0]
-        record = database.DRECORD[record_id]
-        record[PHA] += [json[record_id]]
-        database.DRECORD[record_id] = record
-        return record
-    except Exception:
-        return "Fase dd jogo não foi gravado %s" % str(request.params.values())"""
-
 
 
 if __name__ == "__main__":
