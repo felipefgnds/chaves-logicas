@@ -28,11 +28,12 @@ def hello():
     return DIR
 
 
-@get('/<filename:re:.*\.html>')
+'''@get('/<filename:re:.*\.html>')
 @get('/<filename:re:.*\.py>')
 @get('/<filename:re:.*\.(jpg|png|gif|ico)>')
 @get('/<filename:re:.*\.css>')
-@get('/<filename:re:.*\.js>')
+@get('/<filename:re:.*\.js>')'''
+@get('/<filename:path>')
 def file(filename):
     return static_file(filename, root=DIR)
 
