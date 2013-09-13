@@ -17,7 +17,7 @@ from datetime import datetime
 from bottle import route, view, run, get, post, static_file, request
 import bottle
 import os
-DIR = os.path.dirname(__file__)+'/'
+DIR = './'
 ADM, HEA, PEC, PHA, END = 'adm1n head peca fase fim'.split()
 
 #LIBS = DIR + '../libs/lib'
@@ -30,7 +30,7 @@ def hello():
 
 @get('/<filename:re:.*\.html>')
 def html(filename):
-    return static_file(filename, root='./')
+    return static_file(filename, root=DIR)
 
 
 @get('/<filename:re:.*\.py>')
