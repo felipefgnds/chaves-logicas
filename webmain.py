@@ -2,26 +2,19 @@
 # -*- coding: UTF8 -*-
 """
 ############################################################
-Pyndorama - Main
+Chaves Logicas - Main
 ############################################################
 
 :Author: *Carlo E. T. Oliveira*
-:Contact: carlo@nce.ufrj.br
-:Date: 2013/08/10
-:Status: This is a "work in progress"
-:Revision: 0.1.0
-:Home: `Labase <http://labase.selfip.org/>`__
-:Copyright: 2013, `GPL <http://is.gd/3Udt>`__.
+:Author: *Felipe dos Santos Fagundes*
+:Contact: fagundesfelipe2012@gmail.com
 """
 from datetime import datetime
 from bottle import route, view, run, get, post, static_file, request
 import bottle
 import os
+import json
 DIR = './'
-ADM, HEA, PEC, PHA, END = 'adm1n head peca fase fim'.split()
-
-#LIBS = DIR + '../libs/lib'
-IMGS = DIR + '/'
 		
 @route('/hello')
 def hello():
@@ -36,10 +29,21 @@ def hello():
 @get('/<filename:path>')
 def file(filename):
     return static_file(filename, root=DIR)
+	
 
-
-
-
+@post('/record')
+def record_phase():
+	doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
+	print(doc_id)
+   """ try:
+        json = retrieve_data(request.params)
+        record_id = json.keys()[0]
+        record = database.DRECORD[record_id]
+        record[PHA] += [json[record_id]]
+        database.DRECORD[record_id] = record
+        return record
+    except Exception:
+        return "Fase dd jogo não foi gravado %s" % str(request.params.values())"""
 
 
 
