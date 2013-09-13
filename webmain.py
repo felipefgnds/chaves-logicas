@@ -18,7 +18,7 @@ DIR = './'
 		
 @route('/hello')
 def hello():
-    return DIR
+	return DIR
 
 
 '''@get('/<filename:re:.*\.html>')
@@ -28,7 +28,7 @@ def hello():
 @get('/<filename:re:.*\.js>')'''
 @get('/<filename:path>')
 def file(filename):
-    return static_file(filename, root=DIR)
+	return static_file(filename, root=DIR)
 	
 
 @post('/record')
@@ -37,8 +37,8 @@ def record_phase():
 		doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
 		print(doc_id)
 	except Exception:
-        return "Error in Database"
-        pass
+		return "Error in Database"
+		pass
    """ try:
         json = retrieve_data(request.params)
         record_id = json.keys()[0]
@@ -52,6 +52,6 @@ def record_phase():
 
 
 if __name__ == "__main__":
-    run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True, workers=1)
+	run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True, workers=1)
 
 app = bottle.default_app()
