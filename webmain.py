@@ -14,6 +14,7 @@ from bottle import route, view, run, get, post, static_file, request
 import bottle
 import os
 import json
+import database
 DIR = './'
 		
 @route('/hello')
