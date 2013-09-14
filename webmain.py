@@ -31,7 +31,7 @@ def file(filename):
 	return static_file(filename, root=DIR)
 	
 
-@post('/record')
+@get('/record')
 def record_phase():
 	try:
 		doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
