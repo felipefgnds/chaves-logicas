@@ -15,12 +15,12 @@ from os import environ
 from couchdb import Server
 
 URL = environ.get('CLOUDANT_URL')
-_DOCBASES = ['keystore']
+_DOCBASES = ['oi']
 
 
 class Activ(Server):
     "Active database"
-    keystore = {}
+    oi = {}
 
     def __init__(self, url=URL):
         Server.__init__(self, url)
@@ -41,7 +41,7 @@ class Activ(Server):
 #try:
 if True:
     __ACTIV = Activ()
-    DRECORD = __ACTIV.keystore
+    DRECORD = __ACTIV.oi
 #except Exception:
     #DRECORD = None
 
