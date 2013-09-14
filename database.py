@@ -15,7 +15,7 @@ from os import environ
 from couchdb import Server
 
 URL = environ.get('CLOUDANT_URL')
-_DOCBASES = ['oi']
+_DOCBASES = ['keystore']
 
 
 class Activ(Server):
