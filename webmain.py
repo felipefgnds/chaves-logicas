@@ -35,7 +35,7 @@ def file(filename):
 def record_phase():
 	try:
 		doc_id, doc_rev = database.DRECORD.save({'nome': 'Archie', 'idade': '17'})
-		print(doc_id)
+		return doc_id
 	except Exception:
 		return "Error in Database"
 		pass
