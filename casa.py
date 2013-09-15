@@ -4,6 +4,8 @@ Chaves Logicas - Classe Casa
 ############################################################
 """
 
+import database
+
 class Casa:
 	def __init__(self, casa_visual, map_pecas,tipo=None):
 		"""Constroi as partes do Jogo. """
@@ -12,10 +14,10 @@ class Casa:
 		self.map_pecas = map_pecas
 		self.peca=None
 		
-		if tipo=="alvo" :
-			self.casa_visual.ondragover = self.drag_over
-			self.casa_visual.ondrop = self.drop
-			self.casa_visual.onmouseover = self.mouse_over
+		
+		self.casa_visual.ondragover = self.drag_over
+		self.casa_visual.ondrop = self.drop
+		self.casa_visual.onmouseover = self.mouse_over
 			
 			
 	def mouse_over(self, event):
@@ -39,6 +41,8 @@ class Casa:
 				self.troca_peca(self, casa_atual)
 		else:
 			self.pega_peca(casa_atual)
+		
+		
 		
 		
 	def pega_peca(self, casa):
