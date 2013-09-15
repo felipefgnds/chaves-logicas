@@ -7,12 +7,13 @@ Chaves Logicas - Classe Casa
 import database
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None):
+	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
 		self.map_pecas = map_pecas
 		self.peca=None
+		self.jogador = id_jogador
 		
 		
 		self.casa_visual.ondragover = self.drag_over
@@ -42,7 +43,9 @@ class Casa:
 		else:
 			self.pega_peca(casa_atual)
 		
-		
+		jogada = database.DRECORD[self.jogador]
+		record["jogadas"] = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
+		database.DRECORD[self.jogador] = record
 		
 		
 	def pega_peca(self, casa):
