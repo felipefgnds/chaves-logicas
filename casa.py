@@ -5,6 +5,7 @@ Chaves Logicas - Classe Casa
 """
 
 import database
+import os
 
 class Casa:
 	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None):
