@@ -40,6 +40,23 @@ def record_phase():
 	except Exception:
 		return "Error in Database"
 		pass
+		
+
+def get_json(request):
+	data = {i: req[i] for i in request}
+	print(data)
+	return data
+		
+
+@get('/cadastrar_jogador')
+def cadastrar_jogador():
+	json = get_json(request.params)
+	try:
+		doc_id, doc_rev = database.DRECORD.save(json)
+		return doc_id
+	except Exception:
+		return "Error in Database"
+		pass
 
 
 if __name__ == "__main__":
