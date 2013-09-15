@@ -53,7 +53,7 @@ def cadastrar_jogador():
 	json = get_json(request.params)
 	try:
 		doc_id, doc_rev = database.DRECORD.save(json)
-		return doc_id
+		return static_file("nivel1.html", root=DIR)
 	except Exception:
 		return "Error in Database"
 		pass
