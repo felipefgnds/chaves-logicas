@@ -43,7 +43,7 @@ def record_phase():
 		
 
 def get_json(request):
-	data = {i: req[i] for i in request}
+	data = {i: request[i] for i in request}
 	print(data)
 	return data
 		
