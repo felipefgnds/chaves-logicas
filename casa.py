@@ -5,7 +5,6 @@ Chaves Logicas - Classe Casa
 """
 
 import database
-import os
 
 class Casa:
 	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None):
@@ -44,7 +43,7 @@ class Casa:
 		else:
 			self.pega_peca(casa_atual)
 		
-		jogada = database.DRECORD[self.jogador]
+		record = database.DRECORD[self.jogador]
 		record["jogadas"] = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
 		database.DRECORD[self.jogador] = record
 		
