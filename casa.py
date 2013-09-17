@@ -43,9 +43,26 @@ class Casa:
 		else:
 			self.pega_peca(casa_atual)
 		
-		record = database.DRECORD[self.jogador]
+		"""record = database.DRECORD[self.jogador]
 		record["jogadas"] = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
-		database.DRECORD[self.jogador] = record
+		database.DRECORD[self.jogador] = record"""
+		
+		req = ajax()
+		req.on_complete = on_complete
+		req.set_timeout(5,err_msg)
+		req.open('GET','/record?peca=' + id_peca,True)
+		req.send()
+		
+	def on_complete(req):
+		print(req.readyState)
+		print('status',req.status)
+		if req.status==200 or req.status==0:
+			print(req.text)
+		else:
+			print("error "+req.text)
+			
+	def err_msg():
+		print("Erro no Ajax")
 		
 		
 	def pega_peca(self, casa):

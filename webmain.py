@@ -34,7 +34,7 @@ def file(filename):
 @get('/record')
 def record_phase():
 	try:
-		doc_id, doc_rev = database.DRECORD.save({'nome': 'Barry Fairbrother', 'idade': '17'})
+		doc_id, doc_rev = database.DRECORD.save({'nome': 'Owen Wilson', 'idade': '17'})
 		json = get_json(request.params)
 		record = database.DRECORD[doc_id]
 		record["jogadas"] = json
