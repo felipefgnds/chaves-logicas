@@ -12,6 +12,7 @@ Chaves Logicas - Main
 from bottle import route, view, run, get, post, static_file, request
 import bottle
 import json
+import os
 import database
 DIR = './'
 		
