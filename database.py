@@ -10,7 +10,7 @@ Chaves Logicas - Database
 :Contact: fagundesfelipe2012@gmail.com
 
 """
-
+import os
 from os import environ
 from couchdb import Server
 
