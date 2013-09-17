@@ -37,7 +37,7 @@ def record_phase():
 		doc_id, doc_rev = database.DRECORD.save({'nome': 'Owen Wilson', 'idade': '17'})
 		json = get_json(request.params)
 		record = database.DRECORD[doc_id]
-		record["jogadas"] = json
+		record["jogadas"]{} = json
 		database.DRECORD[doc_id] = record
 		return doc_id
 	except Exception:
@@ -46,7 +46,7 @@ def record_phase():
 		
 
 def get_json(request):
-	data = {i: request[i] for i in request}
+	data = {i : request[i] for i in request}
 	print(data)
 	return data
 		
@@ -61,6 +61,12 @@ def cadastrar_jogador():
 	except Exception:
 		return "Error in Database"
 		pass
+		
+"""@get('/salvar_jogada')
+def salvar_jogada():
+	record = database.DRECORD[request.params["id_jogador"]]
+	record["jogadas"]{} = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
+	database.DRECORD[self.jogador] = record"""
 
 
 if __name__ == "__main__":
