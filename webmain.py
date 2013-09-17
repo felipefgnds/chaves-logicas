@@ -46,6 +46,20 @@ def record_phase():
 		return "Error in Database"
 		pass
 		
+@get('/add')
+def add():
+	try:
+		doc_id = "1f01c40fc5554caf0a43172e024f0c29"
+		record = database.DRECORD[doc_id]
+		jogadas = record["jogadas"]
+		jogadas.append(json)
+		record["jogadas"] = jogadas
+		database.DRECORD[doc_id] = record
+		return doc_id
+	except Exception:
+		return "Error in Database"
+		pass
+		
 
 def get_json(request):
 	data = {i : request[i] for i in request}
