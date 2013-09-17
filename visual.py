@@ -34,7 +34,7 @@ LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 class Visual:
 	"""Classe responsavel por desenhar o tabuleiro do jogo"""
 	
-	def __init__(self,doc,gui,nivel,id_jogador):
+	def __init__(self,doc,gui,nivel):
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
 		self.canvas=gui.svg(width=LARGURA,height=ALTURA)
