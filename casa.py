@@ -4,8 +4,6 @@ Chaves Logicas - Classe Casa
 ############################################################
 """
 
-import database
-
 class Casa:
 	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None):
 		"""Constroi as partes do Jogo. """
