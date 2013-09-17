@@ -64,11 +64,11 @@ def cadastrar_jogador():
 		return "Error in Database"
 		pass
 		
-@get('/salvar_jogada')
+"""@get('/salvar_jogada')
 def salvar_jogada():
 	record = database.DRECORD[request.params["id_jogador"]]
 	record["jogadas"]{} = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
-	database.DRECORD[self.jogador] = record
+	database.DRECORD[self.jogador] = record"""
 
 
 if __name__ == "__main__":
