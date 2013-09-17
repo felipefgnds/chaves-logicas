@@ -31,7 +31,7 @@ def file(filename):
 	return static_file(filename, root=DIR)
 	
 
-@get('/record')
+"""@get('/record')
 def record_phase():
 	try:
 		doc_id, doc_rev = database.DRECORD.save({'nome': 'Owen Wilson', 'idade': '17', "jogadas": [ {'tipo':'mover', 'peca':'p78'}]})
@@ -44,9 +44,9 @@ def record_phase():
 		return doc_id
 	except Exception:
 		return "Error in Database"
-		pass
+		pass"""
 		
-@get('/add')
+"""@get('/add')
 def add():
 	try:
 		doc_id = "1f01c40fc5554caf0a43172e024f0c29"
@@ -59,7 +59,7 @@ def add():
 		return doc_id
 	except Exception:
 		return "Error in Database"
-		pass
+		pass"""
 		
 
 def get_json(request):
@@ -79,11 +79,17 @@ def cadastrar_jogador():
 		return "Error in Database"
 		pass
 		
-"""@get('/salvar_jogada')
+@get('/salvar_jogada')
 def salvar_jogada():
-	record = database.DRECORD[request.params["id_jogador"]]
-	record["jogadas"]{} = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
-	database.DRECORD[self.jogador] = record"""
+	try:
+		record = database.DRECORD[request.params["id_jogador"]]
+		jogadas = record["jogadas_nivel1"]
+		jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["id_peca"]})
+		database.DRECORD[request.params["id_jogador"]] = record
+		return "Ok"
+	except Exception:
+		return "Error in Database"
+		pass
 
 
 if __name__ == "__main__":
