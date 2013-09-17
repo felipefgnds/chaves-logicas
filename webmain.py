@@ -52,6 +52,7 @@ def add():
 		doc_id = "1f01c40fc5554caf0a43172e024f0c29"
 		record = database.DRECORD[doc_id]
 		jogadas = record["jogadas"]
+		json = get_json(request.params)
 		jogadas.append(json)
 		record["jogadas"] = jogadas
 		database.DRECORD[doc_id] = record
