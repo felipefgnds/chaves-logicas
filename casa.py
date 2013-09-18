@@ -48,7 +48,7 @@ class Casa:
 		req = ajax()
 		req.on_complete = on_complete
 		req.set_timeout(5,err_msg)
-		req.open('GET','/salvar_jogada?origem=' + casa_atual.tipo + '&destino=' + self.tipo + '&peca=' + id_peca,True)
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + casa_atual.tipo + '&destino=' + self.tipo + '&peca=' + id_peca,True)
 		req.send()
 		
 	def on_complete(req):
