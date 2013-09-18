@@ -1,7 +1,7 @@
 """
-############################################################
+##########################################################
 Chaves Logicas - Principal
-############################################################
+##########################################################
 """
 
 # git push new master
@@ -10,9 +10,10 @@ from visual import Visual
 from casa import Casa
 
 class Jogo:
-	def __init__(self, gui, nivel):
-		"""Constroi as partes do Jogo. q"""
+	def __init__(self, gui, nivel, id_jogador):
+		"""Constroi as partes do Jogo."""
 		self.build_base(gui)
+		self.jogador=id_jogador
 		
 		if nivel==1 or nivel==5 :
 			self.build_inventario(gui)
@@ -30,7 +31,7 @@ class Jogo:
 	def build_inventario(self, gui):
 		""" """
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "alvo") for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador) for casa_visual in gui.build_inventario(gui)]
 		
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
@@ -50,16 +51,16 @@ class Jogo:
 		
 	def build_alvos(self, gui):
 		""" """
-		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo") for casa_visual in gui.build_alvos(gui)]
+		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_alvos(gui)]
 		
 	def build_grid(self, gui):
 		""" """
-		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo") for casa_visual in gui.build_grid(gui)]
+		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_grid(gui)]
 		
 	def build_deck(self, gui):
 		""" """
 		# Criando as casas do inventario
-		self.deck = [Casa(casa_visual, None, "alvo") for casa_visual in gui.build_deck(gui)]
+		self.deck = [Casa(casa_visual, None, "inventario", self.jogador) for casa_visual in gui.build_deck(gui)]
 		
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.deck)]
@@ -79,7 +80,6 @@ class Jogo:
 	
 		
  
-def main(doc,gui,nivel):
+def main(doc,gui,nivel,id_jogador):
   print('Chaves Logicas')
-  Jogo(Visual(doc,gui,nivel),nivel)
-
+  Jogo(Visual(doc,gui,nivel),nivel,id_jogador)
