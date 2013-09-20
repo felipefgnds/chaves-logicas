@@ -83,15 +83,16 @@ def cadastrar_jogador():
 def salvar_jogada():
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
-		jogadas = record["jogadas_nivel1"]
-		jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["id_peca"]})
-		record["jogadas_nivel1"] = jogadas
-		database.DRECORD[request.params["id_jogador"]] = record
-		return "Ok"
 	except Exception:
 		"""return "Erro no Banco de Dados"""
 		return request.params["origem"]
 		pass
+	jogadas = record["jogadas_nivel1"]
+	jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["id_peca"]})
+	record["jogadas_nivel1"] = jogadas
+	database.DRECORD[request.params["id_jogador"]] = record
+	return "Ok"
+	
 
 
 if __name__ == "__main__":
