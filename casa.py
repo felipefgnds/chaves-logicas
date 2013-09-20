@@ -41,14 +41,16 @@ class Casa:
 		else:
 			self.pega_peca(casa_atual)
 		
-		"""record = database.DRECORD[self.jogador]
-		record["jogadas"] = {'origem': casa_atual.tipo, 'destino': self.tipo, 'peca': id_peca}
-		database.DRECORD[self.jogador] = record"""
-		
 		req = ajax()
 		req.on_complete = on_complete
 		req.set_timeout(5,err_msg)
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + casa_atual.tipo + '&destino=' + self.tipo + '&peca=' + id_peca,True)
+		
+		if self.tipo=="alvo":
+			casa_alvo = self.casa_visual.id
+		else:
+			casa_alvo = None
+		
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + casa_atual.tipo + '&destino=' + self.tipo + '&peca=' + id_peca + '&casa=' + casa_alvo,True)
 		req.send()
 		
 	def on_complete(req):

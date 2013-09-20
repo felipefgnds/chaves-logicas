@@ -3,7 +3,7 @@
 Chaves Logicas - Classe Visual
 ############################################################
 
-:Author: *Felipe Fagundes*
+:Author: *Felipe dos Santos Fagundes*
 
 """
 
@@ -83,7 +83,12 @@ class Visual:
 		"""Desenha uma casa no tabuleiro"""
 		
 		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=self.rx,fill=cor)
-		g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
+		
+		if id is not None :
+			id = "c" + LETRAS[id]
+			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y, id=id)
+		else:
+			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
 		g <= casa
 		lugar <= g
 		return g	
@@ -161,7 +166,7 @@ class Visual:
 		
 	def build_letra(self, casa, letra):
 		""" Desenha as letras"""					
-		imagem=self.gui.image(id="p" + str(id), x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".PNG", draggable=False)
+		imagem=self.gui.image(x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".PNG", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
 		g <= imagem
