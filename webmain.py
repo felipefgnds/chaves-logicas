@@ -84,7 +84,7 @@ def salvar_jogada():
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_nivel1"]
-		if(not isinstance(jogadas, list):
+		if not isinstance(jogadas, list):
 			jogadas = []
 		jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
 		record["jogadas_nivel1"] = jogadas
