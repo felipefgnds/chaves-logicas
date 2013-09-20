@@ -10,10 +10,12 @@ Chaves Logicas - Main
 :Contact: fagundesfelipe2012@gmail.com
 """
 from bottle import route, view, run, get, post, static_file, request
+from datetime import datetime
 import bottle
 import json
 import os
 import database
+
 DIR = './'
 		
 @route('/hello')
@@ -86,13 +88,12 @@ def salvar_jogada():
 		jogadas = record["jogadas_nivel1"]
 		if not isinstance(jogadas, list):
 			jogadas = []
-		jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
+		jogadas.append({'timestamp': str(datetime.now()), 'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
 		record["jogadas_nivel1"] = jogadas
 		database.DRECORD[request.params["id_jogador"]] = record
 		return "Ok"
 	except Exception:
-		"""return "Erro no Banco de Dados"""
-		return request.params["origem"]
+		return "Erro no Banco de Dados"
 		pass
 	
 
