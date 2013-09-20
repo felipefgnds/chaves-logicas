@@ -88,7 +88,7 @@ def salvar_jogada():
 		"""return "Erro no Banco de Dados"""
 		return request.params["origem"]
 		pass
-	jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["id_peca"]})
+	jogadas.append({'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
 	record["jogadas_nivel1"] = jogadas
 	database.DRECORD[request.params["id_jogador"]] = record
 	return "Ok"
