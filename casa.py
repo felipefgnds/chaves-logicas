@@ -46,11 +46,11 @@ class Casa:
 		req.set_timeout(5,err_msg)
 		
 		if self.tipo=="alvo":
-			casa_alvo = self.casa_visual.id
+			destino = self.casa_visual.id
 		else:
-			casa_alvo = None
+			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + casa_atual.tipo + '&destino=' + self.tipo + '&peca=' + id_peca + '&casa=' + casa_alvo,True)
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + casa_atual.tipo + '&destino=' + destino + '&peca=' + id_peca,True)
 		req.send()
 		
 	def on_complete(req):
