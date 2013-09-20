@@ -89,7 +89,8 @@ def salvar_jogada():
 		database.DRECORD[request.params["id_jogador"]] = record
 		return "Ok"
 	except Exception:
-		return "Error in Database"
+		"""return "Erro no Banco de Dados"""
+		return request.params["id_jogador"]
 		pass
 
 
