@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: UTF8 -*-
 """
-############################################################
+###########################################################
 Chaves Logicas - Main
-############################################################
+###########################################################
 
 :Author: *Carlo E. T. Oliveira*
 :Author: *Felipe dos Santos Fagundes*
@@ -78,7 +78,7 @@ def cadastrar_jogador():
 		doc_id, doc_rev = database.DRECORD.save(json)
 		return dict(id_jogador=doc_id)
 	except Exception:
-		return "Error in Database"
+		return "Erro no Banco de Dados"
 		pass
 		
 @get('/salvar_jogada')
@@ -91,7 +91,7 @@ def salvar_jogada():
 		jogadas.append({'timestamp': str(datetime.now()), 'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
 		record["jogadas_nivel1"] = jogadas
 		database.DRECORD[request.params["id_jogador"]] = record
-		return "Ok"
+		return "Jogada salva no banco de dados"
 	except Exception:
 		return "Erro no Banco de Dados"
 		pass
