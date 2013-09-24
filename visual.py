@@ -13,8 +13,8 @@ RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 3
-PEC_V = 9
+PEC_H = 9
+PEC_V = 3
 CASA = 40
 
 ALTURA_ALVOS = 2*M_INT + 5*CASA + 2*SEP
