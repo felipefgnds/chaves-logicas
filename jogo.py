@@ -11,6 +11,7 @@ Chaves Logicas - Jogo
 
 from visual import Visual
 from casa import Casa
+import random
 
 class Jogo:
 	def __init__(self, gui, nivel, id_jogador):
@@ -34,17 +35,25 @@ class Jogo:
 	def build_inventario(self, gui):
 		""" """
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui) for casa_visual in gui.build_inventario(gui)]
 		
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
 		
+		#pecas = []
+		
+		#for casa in self.inventario:
+		#	peca = gui.build_peca(casa.casa_visual, gui.get_id_peca(random.randint(0,9), str(random.randint(1,4))))
+		#	pecas.append(peca)
+		
 		map_pecas = {}
+		
 		
 		# Alocando uma peca para cada casa do inventario
 		for peca, casa in zip(pecas, self.inventario):
 			map_pecas[peca.id] = casa
-			casa.peca=peca
+			casa.peca = peca
+			casa.num_pecas_inicial = (PEC_H * PEC_V)
 			
 		self.map_pecas = map_pecas
 		
@@ -63,7 +72,7 @@ class Jogo:
 	def build_deck(self, gui):
 		""" """
 		# Criando as casas do inventario
-		self.deck = [Casa(casa_visual, None, "inventario", self.jogador) for casa_visual in gui.build_deck(gui)]
+		self.deck = [Casa(casa_visual, None, "inventario", self.jogador, gui) for casa_visual in gui.build_deck(gui)]
 		
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.deck)]

@@ -3,15 +3,19 @@
 Chaves Logicas - Clase Casa
 ###########################################################
 """
+from visual import Visual
+import svg
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None):
+	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
 		self.map_pecas = map_pecas
 		self.peca=None
+		self.num_pecas_inicial = None
 		self.jogador = id_jogador
+		self.gui=gui
 		
 		
 		self.casa_visual.ondragover = self.drag_over
@@ -55,8 +59,8 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + id_peca,True)
-		req.send()
+		#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,True)
+		#req.send()
 		
 	def on_complete(req):
 		print(req.readyState)
@@ -80,6 +84,18 @@ class Casa:
 		
 		self.peca = casa.peca
 		casa.peca = None
+		
+		if casa.tipo == "inventario":
+			req = ajax()
+			req.on_complete = on_complete
+			req.set_timeout(5,err_msg)
+			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
+			req.send()
+		
+			id = casa.num_pecas_inicial + int(req.text)
+			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
+			casa.peca = nova_peca
+			casa.map_pecas[nova_peca.id] = casa
 		
 	def troca_peca(self, casa1, casa2):
 		aux = casa1.peca

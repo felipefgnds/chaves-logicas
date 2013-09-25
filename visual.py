@@ -29,6 +29,8 @@ ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO
 
 LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
 			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+			
+CAT_PECAS = ["NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"]
 
 
 class Visual:
@@ -45,6 +47,10 @@ class Visual:
 		else : 
 			if nivel==5 :
 				self.rx=20
+	
+		
+	def get_id_peca(self, id_cat, num):
+		return CAT_PECAS[int(id_cat)] + "_" + num
 		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
@@ -141,12 +147,12 @@ class Visual:
 								 
 		return casas
 		
-	
 	def build_peca(self, casa, id):
 		""" """
-								
-		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/" + str(random.randint(1,9)) +".JPG", draggable=True)
-		g = self.gui.g(id="gp" + str(id), transform="translate(-" + casa.x + ", -" + casa.y + ")")
+		img = self.get_id_peca(random.randint(0,9), str(random.randint(1,4)))
+		
+		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/pecas/" + img +".JPG", draggable=True)
+		g = self.gui.g(id="gp" + str(id), img=img, transform="translate(-" + casa.x + ", -" + casa.y + ")")
 		g_auxiliar = self.gui.g()
 		g_auxiliar.onmouseover = self.aponta_peca
 		g_auxiliar.ondragstart = self.drag_start
