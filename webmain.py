@@ -96,8 +96,8 @@ def salvar_jogada():
 		return "Erro no Banco de Dados"
 		pass
 		
-@get('/get_prox_id_peca')
-def get_prox_id_peca():
+@get('/get_num_peca_extra')
+def get_num_peca_extra():
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		pecas_extras = record["pecas_extras_nv1"]
