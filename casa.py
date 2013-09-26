@@ -7,7 +7,7 @@ from visual import Visual
 import svg
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None):
+	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
@@ -16,6 +16,7 @@ class Casa:
 		self.num_pecas_inicial = None
 		self.jogador = id_jogador
 		self.gui=gui
+		self.doc=doc
 		
 		
 		self.casa_visual.ondragover = self.drag_over
@@ -85,17 +86,17 @@ class Casa:
 		casa.peca = None
 		
 		if casa.tipo == "inventario":
-			req = ajax()
+			"""req = ajax()
 			req.on_complete = on_complete
 			req.set_timeout(5,err_msg)
 			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
-			print("REQ " + str(req.send()))
-			
-		
-			id = casa.num_pecas_inicial + int(req.text)
+			print("REQ " + str(req.send()))"""
+			id = casa.num_pecas_inicial + casa.doc["pecas_extras_nv1"]
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa
+			casa.doc["pecas_extras_nv1"] += 1
+			
 		
 	def troca_peca(self, casa1, casa2):
 		aux = casa1.peca

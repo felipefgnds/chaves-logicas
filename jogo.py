@@ -14,13 +14,13 @@ from casa import Casa
 import random
 
 class Jogo:
-	def __init__(self, gui, nivel, id_jogador):
+	def __init__(self, doc, gui, nivel, id_jogador):
 		"""Constroi as partes do Jogo."""
 		self.build_base(gui)
 		self.jogador=id_jogador
 		
 		if nivel==1 or nivel==5 :
-			self.build_inventario(gui)
+			self.build_inventario(gui, doc)
 			self.build_alvos(gui)
 		
 		if nivel==3 :
@@ -32,10 +32,10 @@ class Jogo:
 		"""Gera a base do tabuleiro do jogo (O fundo do tabuleiro)"""
 		self.base = gui.build_base(gui)
 		
-	def build_inventario(self, gui):
+	def build_inventario(self, gui, doc):
 		""" """
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc) for casa_visual in gui.build_inventario(gui)]
 		
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
@@ -94,4 +94,4 @@ class Jogo:
  
 def main(doc,gui,nivel,id_jogador):
   print('Chaves Logicas')
-  Jogo(Visual(doc,gui,nivel),nivel,id_jogador)
+  Jogo(doc,Visual(doc,gui,nivel),nivel,id_jogador)
