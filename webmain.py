@@ -101,7 +101,7 @@ def get_num_peca_extra():
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		pecas_extras = record["pecas_extras_nv1"]
-		pecas_extras += 1
+		pecas_extras = int(pecas_extras) + 1
 		record["pecas_extras_nv1"] = pecas_extras
 		database.DRECORD[request.params["id_jogador"]] = record
 		return pecas_extras - 1
