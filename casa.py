@@ -91,11 +91,11 @@ class Casa:
 			req.set_timeout(5,err_msg)
 			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
 			print("REQ " + str(req.send()))"""
-			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"])
+			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa
-			casa.doc["pecas_extras_nv1"] += 1
+			casa.doc["pecas_extras_nv1"].value = int(casa.doc["pecas_extras_nv1"].value) + 1
 			
 		
 	def troca_peca(self, casa1, casa2):
