@@ -92,7 +92,7 @@ class Casa:
 			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
 			req.send()
 		
-			id = casa.num_pecas_inicial + int(req.text)
+			id = casa.num_pecas_inicial #+ int(req.text)
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa

@@ -104,7 +104,7 @@ def get_num_peca_extra():
 		pecas_extras = int(pecas_extras) + 1
 		record["pecas_extras_nv1"] = pecas_extras
 		database.DRECORD[request.params["id_jogador"]] = record
-		return 8
+		return "oi"
 	except Exception:
 		return "Erro no Banco de Dados"
 		pass
