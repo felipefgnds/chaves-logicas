@@ -90,7 +90,7 @@ class Casa:
 			req.on_complete = on_complete
 			req.set_timeout(5,err_msg)
 			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
-			req.send()
+			print("REQ " + req.send())
 		
 			id = casa.num_pecas_inicial + int(req.text)
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
