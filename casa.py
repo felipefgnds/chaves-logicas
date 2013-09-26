@@ -88,9 +88,9 @@ class Casa:
 			req = ajax()
 			req.on_complete = on_complete
 			req.set_timeout(5,err_msg)
-			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
+			print("open" + req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True))
 			print("REQ ")
-			req.send()
+			#req.send()
 		
 			id = casa.num_pecas_inicial + int(req.text)
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
