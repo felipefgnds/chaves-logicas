@@ -63,10 +63,9 @@ class Casa:
 		#req.send()
 		
 	def on_complete(req):
-		print(req.readyState)
-		print('status',req.status)
 		if req.status==200 or req.status==0:
 			print(req.text)
+			return req.text
 		else:
 			print("error "+req.text)
 			
