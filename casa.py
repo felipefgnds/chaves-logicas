@@ -60,8 +60,8 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,True)
-		#req.send()
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,True)
+		req.send()
 		
 	def on_complete(req):
 		if req.status==200 or req.status==0:
@@ -86,11 +86,6 @@ class Casa:
 		casa.peca = None
 		
 		if casa.tipo == "inventario":
-			"""req = ajax()
-			req.on_complete = on_complete
-			req.set_timeout(5,err_msg)
-			req.open('GET','/get_num_peca_extra?id_jogador='+ casa.jogador,True)
-			print("REQ " + str(req.send()))"""
 			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
 			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
 			casa.peca = nova_peca

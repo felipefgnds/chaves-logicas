@@ -96,15 +96,29 @@ def salvar_jogada():
 		return "Erro no Banco de Dados"
 		pass
 		
-@get('/get_num_peca_extra')
-def get_num_peca_extra():
+@get('/get_pecas')
+def get_pecas():
 	try:
-		record = database.DRECORD[request.params["id_jogador"]]
-		pecas_extras = record["pecas_extras_nv1"]
-		pecas_extras = int(pecas_extras) + 1
-		record["pecas_extras_nv1"] = pecas_extras
-		database.DRECORD[request.params["id_jogador"]] = record
-		return str(pecas_extras - 1)
+		pecas = {}
+		record = database.DRECORD[request.params["_PECAS"]]
+		
+		ant = ""
+		for peca in record.keys():
+			categoria = peca.split("_")[0]
+			if len(categoria) > 0 :
+				if categoria != ant :
+					pecas[categoria] = []
+				pecas[categoria].append(peca)
+				ant = categoria
+		
+		string = ""
+		for cat in pecas.keys():
+			string += cat + "|"
+			for peca in pecas[cat]:
+				string += peca + ","
+			string += ";"
+			
+		return string
 	except Exception:
 		return "Erro no Banco de Dados"
 		pass
