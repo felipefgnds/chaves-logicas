@@ -61,15 +61,15 @@ class Visual:
 		for str in string:
 			str = str.split("|")
 			str_pecas = str[1].split(",")
-			#pecas.append(str_pecas)
-			pecas[str[0]] = str_pecas
+			if str_pecas != "":
+				pecas[str[0]] = str_pecas
+			else:
+				pecas[str[0]] = []
 				
 		if cat is None:
 			cat = CAT_PECAS[random.randint(0,len(pecas))]
-			#while len(pecas[cat]) == 0 :
-				#cat = random.randint(0,len(pecas))
 		
-		if len(pecas[cat]) == 0:
+		if not pecas[cat]:
 			return None
 			
 		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]

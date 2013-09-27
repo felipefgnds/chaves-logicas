@@ -7,7 +7,7 @@ from visual import Visual
 import svg
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None, categorias=None):
+	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
@@ -17,7 +17,6 @@ class Casa:
 		self.jogador = id_jogador
 		self.gui=gui
 		self.doc=doc
-		self.categorias = categorias
 		
 		
 		self.casa_visual.ondragover = self.drag_over

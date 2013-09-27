@@ -51,16 +51,8 @@ class Jogo:
 	def build_inventario(self, gui, doc):
 		""" """
 		
-		# Carregando lista de categorias
-		string = doc["pecas"].value
-		string = string.split(";")
-		categorias = {}
-		for num,str in enumerate(string):
-			str = str.split("|")
-			categorias[str[0]] = num
-		
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc, categorias) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc) for casa_visual in gui.build_inventario(gui)]
 		
 				
 		# Criando as pecas
