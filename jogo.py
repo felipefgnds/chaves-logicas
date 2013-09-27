@@ -22,7 +22,7 @@ class Jogo:
 		req = ajax()
 		req.on_complete = on_complete
 		req.set_timeout(5,err_msg)
-		req.open('GET','/get_pecas',True)
+		req.open('GET','/get_pecas',False)
 		req.send()
 		
 		if nivel==1 or nivel==5 :
@@ -52,7 +52,7 @@ class Jogo:
 		""" """
 		
 		# Carregando lista de categorias
-		string = doc["pecas"].text
+		string = doc["pecas"].value
 		string = string.split(";")
 		categorias = {}
 		for num,str in enumerate(string):
@@ -63,7 +63,7 @@ class Jogo:
 		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc, categorias) for casa_visual in gui.build_inventario(gui)]
 		
 		# Carregando lista de pecas
-		string = doc["pecas"].text
+		string = doc["pecas"].value
 		string = string.split(";")
 		nome_pecas = []
 		for str in string:
