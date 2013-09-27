@@ -100,10 +100,10 @@ def salvar_jogada():
 def get_pecas():
 	try:
 		pecas = {}
-		record = database.DRECORD[request.params["_PECAS"]]
+		record = database.DRECORD["_PECAS"]
 		
 		ant = ""
-		for peca in record.keys().sort():
+		for peca in sorted(record.keys()):
 			categoria = peca.split("_")[0]
 			if len(categoria) > 0 :
 				if categoria != ant :
