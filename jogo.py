@@ -68,6 +68,7 @@ class Jogo:
 		nome_pecas = []
 		for str in string:
 			str = str.split("|")
+			print(str)
 			str_pecas = str[1].split(",")
 			#nome_pecas[str[0]] = str_pecas
 			nome_pecas.append(str_pecas)
