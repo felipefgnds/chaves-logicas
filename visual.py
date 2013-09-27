@@ -13,7 +13,7 @@ RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 9
+PEC_H = 3
 PEC_V = 3
 CASA = 40
 
@@ -29,6 +29,8 @@ ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO
 
 LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
 			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+			
+CAT_PECAS = ["NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"]
 
 
 class Visual:
@@ -54,32 +56,35 @@ class Visual:
 		string = doc["pecas"].value
 		print(string)
 		string = string.split(";")
-		pecas = []
+			
+		pecas = {}
 		for str in string:
 			str = str.split("|")
 			str_pecas = str[1].split(",")
-			pecas.append(str_pecas)
+			#pecas.append(str_pecas)
+			pecas[str[0]] = str_pecas
 				
 		if cat is None:
-			cat = random.randint(0,len(pecas))
+			cat = CAT_PECAS[random.randint(0,len(pecas))]
+			#while len(pecas[cat]) == 0 :
+				#cat = random.randint(0,len(pecas))
 		
+		if len(pecas[cat]) == 0
+			return None
+			
 		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]
 		pecas[cat].remove(peca)
 		
 		# Recriando a string com as pecas
 		string = ""
-		ant = ""
-		for categorias in pecas:
-			if len(categorias) > 0:
-				for str_peca in categorias:
-					print("PECA :" + str_peca)
-					str_peca = str_peca.split("_")
-					if str_peca[0] != ant:
-						string += str_peca[0] + "|"
-						ant = str_peca[0]
-					string += str_peca[0] + "_" + str_peca[1] + ","
-				string = string[:-1]
-				string += ";"
+		for categoria in pecas.keys():
+			string += categoria + "|"
+			
+			for str_peca in categoria:
+				print("PECA :" + str_peca)
+				string += str_peca + ","
+			string = string[:-1]
+			string += ";"
 		string = string[:-1]
 		
 		self.doc["pecas"].value = string
@@ -185,6 +190,9 @@ class Visual:
 	def build_peca(self, casa, id, cat=None):
 		""" """
 		img = self.get_id_peca(cat)
+		
+		if img is None:
+			return None
 		
 		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/pecas/" + img +".JPG", draggable=True)
 		g = self.gui.g(id="gp" + str(id), img=img, transform="translate(-" + casa.x + ", -" + casa.y + ")")

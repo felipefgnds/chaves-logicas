@@ -6,8 +6,6 @@ Chaves Logicas - Clase Casa
 from visual import Visual
 import svg
 
-CAT_PECAS = {"NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"}
-
 class Casa:
 	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None, categorias=None):
 		"""Constroi as partes do Jogo. """
@@ -95,7 +93,7 @@ class Casa:
 		
 		if casa.tipo == "inventario":
 			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
-			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), casa.categorias[self.peca.img.split("_")[0]])
+			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), self.peca.img.split("_")[0])
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa
 			casa.doc["pecas_extras_nv1"].value = int(casa.doc["pecas_extras_nv1"].value) + 1
