@@ -36,7 +36,7 @@ class Jogo:
 	
 	def on_complete(req):
 		if req.status==200 or req.status==0:
-			doc["pecas"] = req.text
+			doc["pecas"].value = req.text
 		else:
 			print("error "+req.text)
 			
