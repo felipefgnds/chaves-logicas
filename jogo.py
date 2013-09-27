@@ -52,7 +52,7 @@ class Jogo:
 		""" """
 		
 		# Carregando lista de categorias
-		string = self.doc["pecas"].text
+		string = doc["pecas"].text
 		string = string.split(";")
 		categorias = {}
 		for num,str in enumerate(string):
@@ -63,7 +63,7 @@ class Jogo:
 		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc, categorias) for casa_visual in gui.build_inventario(gui)]
 		
 		# Carregando lista de pecas
-		string = self.doc["pecas"].text
+		string = doc["pecas"].text
 		string = string.split(";")
 		nome_pecas = []
 		for str in string:
