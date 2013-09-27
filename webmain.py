@@ -103,7 +103,7 @@ def get_pecas():
 		record = database.DRECORD[request.params["_PECAS"]]
 		
 		ant = ""
-		for peca in record.keys():
+		for peca in record.keys().sort():
 			categoria = peca.split("_")[0]
 			if len(categoria) > 0 :
 				if categoria != ant :
