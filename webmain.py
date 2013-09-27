@@ -118,6 +118,7 @@ def get_pecas():
 				string += peca + ","
 			string = string[:-1]
 			string += ";"
+		string = string[:-1]
 			
 		return string
 	except Exception:
