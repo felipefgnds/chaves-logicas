@@ -82,7 +82,7 @@ class Visual:
 			
 			if len(pecas[categoria]) > 0:
 				for str_peca in pecas[categoria]:
-					print("PECA :" + str_peca)
+					print("PECA = [" + str_peca + "]")
 					string += str_peca + ","
 				string = string[:-1]
 			string += ";"
