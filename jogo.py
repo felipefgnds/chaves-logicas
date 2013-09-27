@@ -62,17 +62,9 @@ class Jogo:
 		# Criando as casas do inventario
 		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc, categorias) for casa_visual in gui.build_inventario(gui)]
 		
-		# Carregando lista de pecas
-		string = doc["pecas"].value
-		string = string.split(";")
-		nome_pecas = []
-		for str in string:
-			str = str.split("|")
-			str_pecas = str[1].split(",")
-			nome_pecas.append(str_pecas)
 				
 		# Criando as pecas
-		pecas = [gui.build_peca(casa.casa_visual, id, nome_pecas) for id,casa in enumerate(self.inventario)]
+		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
 		
 		map_pecas = {}
 

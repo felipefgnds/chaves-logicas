@@ -48,12 +48,42 @@ class Visual:
 				self.rx=20
 	
 		
-	def get_id_peca(self, pecas, cat):
+	def get_id_peca(self, cat):
+	
+		# Carregando lista de pecas
+		string = doc["pecas"].value
+		string = string.split(";")
+		pecas = []
+		for str in string:
+			str = str.split("|")
+			str_pecas = str[1].split(",")
+			pecas.append(str_pecas)
 				
 		if cat is None:
-			return pecas[random.randint(0,9)][random.randint(0,3)]
-		else:
-			return pecas[cat][random.randint(0,3)]
+			cat = random.randint(0,len(pecas))
+		
+		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]
+		pecas[cat].remove(peca)
+		
+		# Recriando a string com as pecas
+		string = ""
+		for categorias in pecas:
+			for str_peca in categorias:
+				str_peca = str_peca.split("_")
+				if str_peca[0] != ant:
+					string += str_peca[0] + "|"
+					ant = str_peca[0]
+				string += str_peca[1] + ","
+			string = string[:-1]
+			string += ";"
+		string = string[:-1]
+		
+		self.doc["pecas"].value = string
+		
+		return peca
+				
+			
+		
 		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
@@ -101,8 +131,7 @@ class Visual:
 		g <= casa
 		lugar <= g
 		return g	
-		
-    
+		 
 	def build_alvos(self,gui):
 		"""Desenha a base dos alvos. Ou seja, o lugar onde ficam as casas alvos e as casas com letras"""
 		
@@ -129,8 +158,7 @@ class Visual:
 								 
 								 
 		return casas
-		
-		
+			
 	def build_grid(self,gui):
 		"""Desenha o grid onde ficam as casas alvos"""
 		
@@ -150,9 +178,9 @@ class Visual:
 								 
 		return casas
 		
-	def build_peca(self, casa, id, pecas, cat=None):
+	def build_peca(self, casa, id, cat=None):
 		""" """
-		img = self.get_id_peca(pecas, cat)
+		img = self.get_id_peca(cat)
 		
 		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/pecas/" + img +".JPG", draggable=True)
 		g = self.gui.g(id="gp" + str(id), img=img, transform="translate(-" + casa.x + ", -" + casa.y + ")")
