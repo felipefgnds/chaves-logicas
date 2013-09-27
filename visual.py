@@ -70,15 +70,16 @@ class Visual:
 		string = ""
 		ant = ""
 		for categorias in pecas:
-			for str_peca in categorias:
-				print("PECA :" + str_peca)
-				str_peca = str_peca.split("_")
-				if str_peca[0] != ant:
-					string += str_peca[0] + "|"
-					ant = str_peca[0]
-				string += str_peca[0] + "_" + str_peca[1] + ","
-			string = string[:-1]
-			string += ";"
+			if len(categorias) > 0:
+				for str_peca in categorias:
+					print("PECA :" + str_peca)
+					str_peca = str_peca.split("_")
+					if str_peca[0] != ant:
+						string += str_peca[0] + "|"
+						ant = str_peca[0]
+					string += str_peca[0] + "_" + str_peca[1] + ","
+				string = string[:-1]
+				string += ";"
 		string = string[:-1]
 		
 		self.doc["pecas"].value = string
