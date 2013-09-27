@@ -61,6 +61,7 @@ class Visual:
 		for str in string:
 			str = str.split("|")
 			str_pecas = str[1].split(",")
+			print("PECAS = [" + str[1] + "]")
 			if str_pecas != "":
 				pecas[str[0]] = str_pecas
 			else:
@@ -69,7 +70,7 @@ class Visual:
 		if cat is None:
 			cat = CAT_PECAS[random.randint(0,len(pecas))]
 		
-		if not pecas[cat]:
+		if pecas[cat] == []:
 			return None
 			
 		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]
@@ -82,7 +83,7 @@ class Visual:
 			
 			if len(pecas[categoria]) > 0:
 				for str_peca in pecas[categoria]:
-					print("PECA = [" + str_peca + "]")
+					#print("PECA = [" + str_peca + "]")
 					string += str_peca + ","
 				string = string[:-1]
 			string += ";"
