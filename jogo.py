@@ -19,6 +19,12 @@ class Jogo:
 		self.build_base(gui)
 		self.jogador=id_jogador
 		
+		req = ajax()
+		req.on_complete = on_complete
+		req.set_timeout(5,err_msg)
+		req.open('GET','/get_pecas',True)
+		req.send()
+		
 		if nivel==1 or nivel==5 :
 			self.build_inventario(gui, doc)
 			self.build_alvos(gui)
@@ -26,6 +32,16 @@ class Jogo:
 		if nivel==3 :
 			self.build_deck(gui)
 			self.build_grid(gui)
+			
+	
+	def on_complete(req):
+		if req.status==200 or req.status==0:
+			doc["pecas"] = req.text
+		else:
+			print("error "+req.text)
+			
+	def err_msg():
+		print("Erro no Ajax")
 		
 		
 	def build_base(self, gui):

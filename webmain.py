@@ -116,6 +116,7 @@ def get_pecas():
 			string += cat + "|"
 			for peca in pecas[cat]:
 				string += peca + ","
+			string = string[:-1]
 			string += ";"
 			
 		return string
