@@ -69,7 +69,7 @@ class Visual:
 			#while len(pecas[cat]) == 0 :
 				#cat = random.randint(0,len(pecas))
 		
-		if len(pecas[cat]) == 0
+		if len(pecas[cat]) == 0:
 			return None
 			
 		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]
