@@ -68,12 +68,8 @@ class Jogo:
 		nome_pecas = []
 		for str in string:
 			str = str.split("|")
-			print(str)
 			str_pecas = str[1].split(",")
-			print(str_pecas)
-			#nome_pecas[str[0]] = str_pecas
 			nome_pecas.append(str_pecas)
-			print(len(nome_pecas))
 				
 		# Criando as pecas
 		pecas = [gui.build_peca(casa.casa_visual, id, nome_pecas) for id,casa in enumerate(self.inventario)]
