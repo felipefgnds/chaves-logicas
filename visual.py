@@ -67,8 +67,10 @@ class Visual:
 		
 		# Recriando a string com as pecas
 		string = ""
+		ant = ""
 		for categorias in pecas:
 			for str_peca in categorias:
+				print("PECA :" + str_peca)
 				str_peca = str_peca.split("_")
 				if str_peca[0] != ant:
 					string += str_peca[0] + "|"
