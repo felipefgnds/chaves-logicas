@@ -52,6 +52,7 @@ class Visual:
 	
 		# Carregando lista de pecas
 		string = doc["pecas"].value
+		print(string)
 		string = string.split(";")
 		pecas = []
 		for str in string:
