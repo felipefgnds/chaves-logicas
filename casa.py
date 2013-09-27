@@ -95,7 +95,7 @@ class Casa:
 		
 		if casa.tipo == "inventario":
 			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
-			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), self.categorias[self.peca.img.split("_")])
+			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), casa.categorias[self.peca.img.split("_")])
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa
 			casa.doc["pecas_extras_nv1"].value = int(casa.doc["pecas_extras_nv1"].value) + 1
