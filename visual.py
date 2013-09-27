@@ -80,10 +80,11 @@ class Visual:
 		for categoria in pecas.keys():
 			string += categoria + "|"
 			
-			for str_peca in pecas[categoria]:
-				print("PECA :" + str_peca)
-				string += str_peca + ","
-			string = string[:-1]
+			if len(pecas[categorias]) > 0:
+				for str_peca in pecas[categoria]:
+					print("PECA :" + str_peca)
+					string += str_peca + ","
+				string = string[:-1]
 			string += ";"
 		string = string[:-1]
 		
