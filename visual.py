@@ -29,8 +29,6 @@ ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO
 
 LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
 			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-			
-CAT_PECAS = ["NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"]
 
 
 class Visual:
@@ -53,9 +51,9 @@ class Visual:
 	def get_id_peca(self, pecas, cat):
 				
 		if cat is None:
-			return pecas[random.randint(0,9)][random.randint(0,4)]
+			return pecas[random.randint(0,9)][random.randint(0,3)]
 		else:
-			return pecas[cat][random.randint(0,4)]
+			return pecas[cat][random.randint(0,3)]
 		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
