@@ -76,7 +76,7 @@ class Visual:
 				if str_peca[0] != ant:
 					string += str_peca[0] + "|"
 					ant = str_peca[0]
-				string += str_peca + ","
+				string += str_peca[0] + "_" + str_peca[1] + ","
 			string = string[:-1]
 			string += ";"
 		string = string[:-1]
