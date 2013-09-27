@@ -50,21 +50,33 @@ class Jogo:
 		
 	def build_inventario(self, gui, doc):
 		""" """
+		
+		# Carregando lista de categorias
+		string = self.doc["pecas"].text
+		string = string.split(";")
+		categorias = {}
+		for num,str in enumerate(string):
+			str = str.split("|")
+			categorias[str[0]] = num
+		
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc, categorias) for casa_visual in gui.build_inventario(gui)]
 		
+		# Carregando lista de pecas
+		string = self.doc["pecas"].text
+		string = string.split(";")
+		nome_pecas = []
+		for str in string:
+			str = str.split("|")
+			str_pecas = str[1].split(",")
+			#nome_pecas[str[0]] = str_pecas
+			nome_pecas.append(str_pecas)
+				
 		# Criando as pecas
-		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
-		
-		#pecas = []
-		
-		#for casa in self.inventario:
-		#	peca = gui.build_peca(casa.casa_visual, gui.get_id_peca(random.randint(0,9), str(random.randint(1,4))))
-		#	pecas.append(peca)
+		pecas = [gui.build_peca(casa.casa_visual, id, nome_pecas) for id,casa in enumerate(self.inventario)]
 		
 		map_pecas = {}
-		
-		
+
 		# Alocando uma peca para cada casa do inventario
 		for peca, casa in zip(pecas, self.inventario):
 			map_pecas[peca.id] = casa

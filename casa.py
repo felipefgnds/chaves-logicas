@@ -6,8 +6,10 @@ Chaves Logicas - Clase Casa
 from visual import Visual
 import svg
 
+CAT_PECAS = {"NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"}
+
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None):
+	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None, categorias=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
@@ -17,35 +19,41 @@ class Casa:
 		self.jogador = id_jogador
 		self.gui=gui
 		self.doc=doc
+		self.categorias = categorias
 		
 		
 		self.casa_visual.ondragover = self.drag_over
 		self.casa_visual.ondrop = self.drop
 		self.casa_visual.onmouseover = self.mouse_over
 			
-			
+	# quando se passa o mouse por cima da casa		
 	def mouse_over(self, event):
 		event.target.style.cursor = "auto"
-			
+	
+	# quando se arrasta uma peca de uma casa
 	def drag_over(self, event):
 		event.data.dropEffect = 'move'
 		event.preventDefault()
 		event.target.style.cursor = "crosshair"
-		
+	
+	# quando soltamos uma peca numa casa
 	def drop(self, event):
 		
 		event.preventDefault()
 		
+		# resgatar a peca e sua casa de origem
 		id_peca = event.data['id_peca']
 		print('drop ' + id_peca)
 		casa_atual = self.map_pecas['g' + id_peca]
 		
+		# verificar se a casa de destino esta vaga ou ocupada
 		if self.peca is not None:
 			if self.peca.id != casa_atual.peca.id :
 				self.troca_peca(self, casa_atual)
 		else:
 			self.pega_peca(casa_atual)
 		
+		# montar requisicao para salvar dados da jogada
 		req = ajax()
 		req.on_complete = on_complete
 		req.set_timeout(5,err_msg)
@@ -73,7 +81,7 @@ class Casa:
 	def err_msg():
 		print("Erro no Ajax")
 		
-		
+	# quando soltamos uma peca numa casa vazia	
 	def pega_peca(self, casa):
 		print('pega peca')
 		
@@ -87,12 +95,12 @@ class Casa:
 		
 		if casa.tipo == "inventario":
 			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
-			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id))
+			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), self.categorias[self.peca.img.split("_")])
 			casa.peca = nova_peca
 			casa.map_pecas[nova_peca.id] = casa
 			casa.doc["pecas_extras_nv1"].value = int(casa.doc["pecas_extras_nv1"].value) + 1
 			
-		
+	# quando soltamos uma peca numa casa ocupada	
 	def troca_peca(self, casa1, casa2):
 		aux = casa1.peca
 		casa1.peca = None
@@ -106,7 +114,8 @@ class Casa:
 		altera_coordenadas(aux, casa2.casa_visual.x, casa2.casa_visual.y)
 		casa2.casa_visual <= aux
 		self.map_pecas[aux.id] = casa2
-		
+	
+	# ajusta as coordenadas de uma peca de acordo com sua nova casa 
 	def altera_coordenadas(peca,x,y):
 		peca.firstChild.firstChild.attributes.getNamedItem("x").nodeValue=x
 		peca.firstChild.firstChild.attributes.getNamedItem("y").nodeValue=y

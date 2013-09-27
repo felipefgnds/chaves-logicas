@@ -39,6 +39,7 @@ class Visual:
 	def __init__(self,doc,gui,nivel):
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
+		self.doc = doc
 		self.canvas=gui.svg(width=LARGURA,height=ALTURA)
 		doc["main"] <= self.canvas
 		
@@ -49,8 +50,12 @@ class Visual:
 				self.rx=20
 	
 		
-	def get_id_peca(self, id_cat, num):
-		return CAT_PECAS[int(id_cat)] + "_" + num
+	def get_id_peca(self, pecas, cat):
+				
+		if cat is None:
+			return pecas[random.randint(0,9)][random.randint(0,4)]
+		else:
+			return pecas[cat][random.randint(0,4)]
 		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
@@ -147,9 +152,9 @@ class Visual:
 								 
 		return casas
 		
-	def build_peca(self, casa, id):
+	def build_peca(self, casa, id, pecas, cat=None):
 		""" """
-		img = self.get_id_peca(random.randint(0,9), str(random.randint(1,4)))
+		img = self.get_id_peca(pecas, cat)
 		
 		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/pecas/" + img +".JPG", draggable=True)
 		g = self.gui.g(id="gp" + str(id), img=img, transform="translate(-" + casa.x + ", -" + casa.y + ")")
