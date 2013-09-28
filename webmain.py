@@ -96,16 +96,17 @@ def get_pecas():
 
 @get('/analisar_nivel1')		
 def analisar_nivel1():
-	try:
+	
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_nivel1"]
 		
 		if not isinstance(jogadas, list):
 			return "Não há jogadas cadastradas"
 			
-		pecas = record = database.DRECORD["_PECAS"]
+		#pecas = record = database.DRECORD["_PECAS"]
 		
 		casas = {}
+	#try:
 		
 		for jogada in jogadas:
 			if jogada["origem"] != "inventario":
@@ -118,9 +119,9 @@ def analisar_nivel1():
 			print(key + " = " + casas[key])
 		
 		return "Ok."
-	except Exception:
-		return "Erro no Banco de Dados"
-		pass
+	#except Exception:
+	#	return "Erro no Banco de Dados"
+	#	pass
 
 if __name__ == "__main__":
 	run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True, workers=1)
