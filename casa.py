@@ -44,9 +44,11 @@ class Casa:
 		casa_atual = self.map_pecas['g' + id_peca]
 		
 		# verificar se a casa de destino esta vaga ou ocupada
+		troca = False
 		if self.peca is not None:
 			if self.peca.id != casa_atual.peca.id :
 				self.troca_peca(self, casa_atual)
+				troca = True
 		else:
 			self.pega_peca(casa_atual)
 		
@@ -67,6 +69,10 @@ class Casa:
 		
 		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,True)
 		req.send()
+		
+		if troca:
+			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img,True)
+			req.send()
 		
 	def on_complete(req):
 		if req.status==200 or req.status==0:
@@ -99,6 +105,7 @@ class Casa:
 			
 	# quando soltamos uma peca numa casa ocupada	
 	def troca_peca(self, casa1, casa2):
+		print("troca pecas")
 		aux = casa1.peca
 		casa1.peca = None
 		casa1.peca = casa2.peca

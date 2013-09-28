@@ -31,37 +31,6 @@ def hello():
 @get('/<filename:path>')
 def file(filename):
 	return static_file(filename, root=DIR)
-	
-
-"""@get('/record')
-def record_phase():
-	try:
-		doc_id, doc_rev = database.DRECORD.save({'nome': 'Owen Wilson', 'idade': '17', "jogadas": [ {'tipo':'mover', 'peca':'p78'}]})
-		json = get_json(request.params)
-		record = database.DRECORD[doc_id]
-		jogadas = record["jogadas"]
-		jogadas.append(json)
-		record["jogadas"] = jogadas
-		database.DRECORD[doc_id] = record
-		return doc_id
-	except Exception:
-		return "Error in Database"
-		pass"""
-		
-"""@get('/add')
-def add():
-	try:
-		doc_id = "1f01c40fc5554caf0a43172e024f0c29"
-		record = database.DRECORD[doc_id]
-		jogadas = record["jogadas"]
-		json = get_json(request.params)
-		jogadas.append(json)
-		record["jogadas"] = jogadas
-		database.DRECORD[doc_id] = record
-		return doc_id
-	except Exception:
-		return "Error in Database"
-		pass"""
 		
 
 def get_json(request):
@@ -124,6 +93,13 @@ def get_pecas():
 	except Exception:
 		return "Erro no Banco de Dados"
 		pass
+
+"""@get('/analisar_nivel1')		
+def analisar_nivel1():
+	try:
+		record = database.DRECORD[request.params["id_jogador"]]
+		jogadas = record["jogadas_nivel1"]"""
+
 	
 
 

@@ -54,7 +54,6 @@ class Visual:
 	
 		# Carregando lista de pecas
 		string = doc["pecas"].value
-		print(string)
 		string = string.split(";")
 			
 		pecas = {}
@@ -192,6 +191,8 @@ class Visual:
 	def build_peca(self, casa, id, cat=None):
 		""" """
 		img = self.get_id_peca(cat)
+		
+		
 		
 		if img is None:
 			return None
