@@ -118,8 +118,13 @@ def analisar_nivel1():
 				
 		result = {"PRE":0, "SIL":0, "ALF":0}
 		
-		for key in casas.keys():
+		for key in pecas.keys():
+			string += key + " = " + pecas[key] + "<br/>"
+			
+		return string
 		
+		for key in casas.keys():
+			print(key)
 			if key in pecas[casas[key]]:
 				result[pecas[casas[key]][key]] += 1
 				
