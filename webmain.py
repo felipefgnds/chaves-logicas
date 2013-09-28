@@ -116,9 +116,9 @@ def analisar_nivel1():
 				casas[jogada["destino"]] = jogada["peca"]
 				
 		for key in casas.keys():
-			print(key + " = " + casas[key])
+			string += key + " = " + casas[key]) + "\n"
 		
-		return "Ok."
+		return string
 	#except Exception:
 	#	return "Erro no Banco de Dados"
 	#	pass
