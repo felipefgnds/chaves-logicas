@@ -121,7 +121,8 @@ def analisar_nivel1():
 		string = ""
 		
 		for key in pecas.keys():
-			string += key + " = " + pecas[key]["cA"] + "<br/>"
+			string = key + " = " + str(pecas[key]["cA"]) + "<br/>"
+			return string
 			
 		return string
 		
