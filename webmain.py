@@ -103,7 +103,7 @@ def analisar_nivel1():
 		if not isinstance(jogadas, list):
 			return "Não há jogadas cadastradas"
 			
-		#pecas = record = database.DRECORD["_PECAS"]
+		pecas = database.DRECORD["_PECAS"]
 		
 		casas = {}
 	#try:
@@ -116,10 +116,16 @@ def analisar_nivel1():
 			if jogada["destino"] != "inventario":
 				casas[jogada["destino"]] = jogada["peca"]
 				
-		string = ""
+		result = {"PRE":0, "SIL":0, "ALF":0}
 		
 		for key in casas.keys():
-			string += key + " = " + casas[key] + "<br/>"
+		
+			if key in pecas[casas[key]]:
+				result[pecas[casas[key]][key]] += 1
+				
+		
+		for key in result.keys():
+			string += key + " = " + result[key] + "<br/>"
 		
 		return string
 	#except Exception:
