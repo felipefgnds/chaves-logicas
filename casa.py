@@ -48,8 +48,10 @@ class Casa:
 			if self.peca.id != casa_atual.peca.id :
 				self.troca_peca(self, casa_atual)
 				troca = True
+				jogada = "troca"
 		else:
 			self.pega_peca(casa_atual)
+			jogada = "encaixe"
 		
 		# montar requisicao para salvar dados da jogada
 		req = ajax()
@@ -66,11 +68,11 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,False)
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
 		req.send()
 		
 		if troca:
-			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img,True)
+			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
 			req.send()
 		
 	def on_complete(req):

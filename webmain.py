@@ -57,7 +57,7 @@ def salvar_jogada():
 		jogadas = record["jogadas_nivel1"]
 		if not isinstance(jogadas, list):
 			jogadas = []
-		jogadas.append({'timestamp': str(datetime.now()), 'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"]})
+		jogadas.append({'timestamp': str(datetime.now()), 'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"], 'tipo': request.params["tipo"]})
 		record["jogadas_nivel1"] = jogadas
 		database.DRECORD[request.params["id_jogador"]] = record
 		return "Jogada salva no banco de dados"
@@ -110,7 +110,8 @@ def analisar_nivel1():
 		
 		for jogada in jogadas:
 			if jogada["origem"] != "inventario":
-				casas[jogada["origem"]] = ""
+				if jogada["tipo"] == "encaixe"
+					casas[jogada["origem"]] = ""
 			
 			if jogada["destino"] != "inventario":
 				casas[jogada["destino"]] = jogada["peca"]
@@ -118,7 +119,7 @@ def analisar_nivel1():
 		string = ""
 		
 		for key in casas.keys():
-			string += key + " = " + casas[key] + "\n"
+			string += key + " = " + casas[key] + "<br/>"
 		
 		return string
 	#except Exception:
