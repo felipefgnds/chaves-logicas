@@ -122,14 +122,13 @@ def analisar_nivel1():
 		
 		for key in pecas.keys():
 			string = key + " = " + str(pecas[key]["cA"]) + "<br/>"
-			return string
 			
-		return string
 		
 		for key in casas.keys():
 			print(key)
-			if key in pecas[casas[key]]:
-				result[pecas[casas[key]][key]] += 1
+			dict = pecas[casas[key]]
+			if key in dict:
+				result[dict[key]] += 1
 				
 		
 		for key in result.keys():
