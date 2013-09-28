@@ -129,7 +129,7 @@ def analisar_nivel1():
 				
 		
 		for key in result.keys():
-			string += key + " = " + result[key] + "<br/>"
+			string += key + " = " + str(result[key]) + "<br/>"
 		
 		return string
 	#except Exception:
