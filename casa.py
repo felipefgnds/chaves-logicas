@@ -67,7 +67,7 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,True)
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img,False)
 		req.send()
 		
 		if troca:

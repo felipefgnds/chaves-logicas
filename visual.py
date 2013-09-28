@@ -60,7 +60,6 @@ class Visual:
 		for str in string:
 			str = str.split("|")
 			str_pecas = str[1].split(",")
-			print("PECAS = [" + str[1] + "]")
 			if str_pecas != "":
 				pecas[str[0]] = str_pecas
 			else:
