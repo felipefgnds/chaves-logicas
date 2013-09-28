@@ -118,7 +118,7 @@ def analisar_nivel1():
 		string = ""
 		
 		for key in casas.keys():
-			string += key + " = " + casas[key]) + "\n"
+			string += key + " = " + casas[key] + "\n"
 		
 		return string
 	#except Exception:
