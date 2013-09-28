@@ -118,6 +118,8 @@ def analisar_nivel1():
 				
 		result = {"PRE":0, "SIL":0, "ALF":0}
 		
+		string = ""
+		
 		for key in pecas.keys():
 			string += key + " = " + pecas[key] + "<br/>"
 			
