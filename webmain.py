@@ -110,7 +110,7 @@ def analisar_nivel1():
 		
 		for jogada in jogadas:
 			if jogada["origem"] != "inventario":
-				if jogada["tipo"] == "encaixe"
+				if jogada["tipo"] == "encaixe":
 					casas[jogada["origem"]] = ""
 			
 			if jogada["destino"] != "inventario":
