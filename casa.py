@@ -40,7 +40,6 @@ class Casa:
 		
 		# resgatar a peca e sua casa de origem
 		id_peca = event.data['id_peca']
-		print('drop ' + id_peca)
 		casa_atual = self.map_pecas['g' + id_peca]
 		
 		# verificar se a casa de destino esta vaga ou ocupada
