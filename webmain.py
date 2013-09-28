@@ -111,7 +111,7 @@ def analisar_nivel1():
 		for jogada in jogadas:
 			if jogada["origem"] != "inventario":
 				if jogada["tipo"] == "encaixe":
-					casas[jogada["origem"]] = ""
+					casas[jogada["origem"]] = 0
 			
 			if jogada["destino"] != "inventario":
 				casas[jogada["destino"]] = jogada["peca"]
@@ -122,7 +122,7 @@ def analisar_nivel1():
 			
 		
 		for key in casas.keys():
-			if key != "":
+			if casas[key] != 0:
 				dict = pecas[str(casas[key])]
 				if key in dict:
 					result[dict[key]] += 1
