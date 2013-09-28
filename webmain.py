@@ -115,6 +115,8 @@ def analisar_nivel1():
 			if jogada["destino"] != "inventario":
 				casas[jogada["destino"]] = jogada["peca"]
 				
+		string = ""
+		
 		for key in casas.keys():
 			string += key + " = " + casas[key]) + "\n"
 		
