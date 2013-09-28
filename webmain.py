@@ -99,10 +99,10 @@ def analisar_nivel1():
 	
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_nivel1"]
-		terminei = record["terminei_nivel1"]
-		fim = request.params["terminei"]
-		record["terminei_nivel1"] = fim
-		database.DRECORD[request.params["id_jogador"]]
+		
+		record["terminei_nivel1"] = request.params["terminei"]
+
+		database.DRECORD[request.params["id_jogador"]] = record
 		
 		if not isinstance(jogadas, list):
 			return "Não há jogadas cadastradas"
