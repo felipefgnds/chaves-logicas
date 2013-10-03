@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Conte-me o que você fez</title>
+</head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="application/xml;charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<style type="text/css">
+form{
+	text-align:left;
+	margin-left:300px;
+}
+
+label {
+    float: left;
+    width: 90px;
+}
+
+</style>
+
+<body>
+
+	<form action="/salvar_conte_me_nivel1" method="POST">
+		<br/><br/>
+		<b>Conte-me o que você fez</b>
+		<br/><br/>
+		<label>Nome:</label> {{nome}}
+		<textarea id="conte_me_nivel1" name="conte_me_nivel1" rows="20" cols="50"/></textarea>
+		<br/><br/>
+		<input type="hidden" name="id_jogador" id="id_jogador" value="{{id_jogador}}"/>
+		<input type="submit" value="SALVAR">
+	</form>
+</body>
+</html>

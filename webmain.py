@@ -94,9 +94,11 @@ def get_pecas():
 		return "Erro no Banco de Dados"
 		pass
 
-@get('/analisar_nivel1')		
+@post('/analisar_nivel1')
+@view('./nivel2.html')		
 def analisar_nivel1():
 	
+	try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_nivel1"]
 		
@@ -110,7 +112,6 @@ def analisar_nivel1():
 		pecas = database.DRECORD["_PECAS"]
 		
 		casas = {}
-	#try:
 		
 		for jogada in jogadas:
 			if jogada["origem"] != "inventario":
@@ -122,7 +123,7 @@ def analisar_nivel1():
 				
 		result = {"PRE":0, "SIL":0, "ALF":0}
 		
-		string = ""
+		#string = ""
 			
 		
 		for key in casas.keys():
@@ -132,13 +133,33 @@ def analisar_nivel1():
 					result[dict[key]] += 1
 				
 		
-		for key in result.keys():
-			string += key + " = " + str(result[key]) + "<br/>"
+		#for key in result.keys():
+		#	string += key + " = " + str(result[key]) + "<br/>"
 		
-		return string
+		#return string
+		
+		return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
+		
+	except Exception:
+		return "Erro no Banco de Dados"
+		pass
+
+		
+@post("/salvar_conte_me_nivel1")
+def salvar_conte_me_nivel1():
+
+	#try:
+		record = database.DRECORD[request.params["id_jogador"]]
+		conte_me = record["conte_me_nivel1"]
+		record["conte_me_nivel1"] = request.params["conte_me_nivel1"]
+		database.DRECORD[request.params["id_jogador"]] = record
+		
+		return "Ok."
 	#except Exception:
 	#	return "Erro no Banco de Dados"
 	#	pass
+	
+
 
 if __name__ == "__main__":
 	run(server='gunicorn', host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True, workers=1)
