@@ -128,9 +128,9 @@ def analisar_nivel1():
 		
 		for key in casas.keys():
 			if casas[key] != 0:
-				dict = pecas[str(casas[key])]
-				if key in dict:
-					result[dict[key]] += 1
+				peca = pecas[str(casas[key])]
+				if key in peca:
+					result[peca[key]] += 1
 				
 		
 		#for key in result.keys():
