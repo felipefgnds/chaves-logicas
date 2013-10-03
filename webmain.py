@@ -94,7 +94,7 @@ def get_pecas():
 		return "Erro no Banco de Dados"
 		pass
 
-@post('/analisar_nivel1')
+@get('/analisar_nivel1')
 @view('./nivel2.html')		
 def analisar_nivel1():
 	
@@ -147,14 +147,13 @@ def analisar_nivel1():
 		
 @post("/salvar_conte_me_nivel1")
 def salvar_conte_me_nivel1():
-
 	#try:
-		record = database.DRECORD[request.params["id_jogador"]]
-		conte_me = record["conte_me_nivel1"]
-		record["conte_me_nivel1"] = request.params["conte_me_nivel1"]
-		database.DRECORD[request.params["id_jogador"]] = record
+	record = database.DRECORD[request.params["id_jogador"]]
+	conte_me = record["conte_me_nivel1"]
+	record["conte_me_nivel1"] = request.params["conte_me_nivel1"]
+	database.DRECORD[request.params["id_jogador"]] = record
 		
-		return "Ok."
+	return "Ok."
 	#except Exception:
 	#	return "Erro no Banco de Dados"
 	#	pass
