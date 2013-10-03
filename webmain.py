@@ -98,7 +98,7 @@ def get_pecas():
 @view('./nivel2.html')		
 def analisar_nivel1():
 	
-	#try:
+	try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_nivel1"]
 		
@@ -140,9 +140,9 @@ def analisar_nivel1():
 		
 		return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
 		
-	#except Exception:
-	#	return "Erro no Banco de Dados"
-	#	pass
+	except Exception:
+		return "Erro no Banco de Dados"
+		pass
 
 		
 @post("/salvar_conte_me_nivel1")
