@@ -9,8 +9,13 @@
 
 <style type="text/css">
 form{
-	text-align:left;
-	margin-left:300px;
+	border: 1px solid;
+    margin-left: 230px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-top: 30px;
+    text-align: left;
+    width: 450px;
 }
 
 label {
@@ -23,24 +28,19 @@ label {
 <body>
 
 	<form action="/cadastrar_jogador" method="GET">
-		<b>Cadastro do Jogador</b>
+	<b>BUSCAR JOGADOR</b>
+	<br/><br/>
+	<label>Identificador:</label> <input type="text" id="id_jogador" name="id_jogador" size="40"/>
+	<br/><br/>
+	<input type="submit" value="BUSCAR">
+	</form>
+	
+	<form action="/cadastrar_jogador" method="GET">
+		<b>CADASTRAR NOVO JOGADOR</b>
 		<br/><br/>
-		<label>Nome:</label> <input type="text" id="nome" name="nome"/>
+		<label>Nome:</label> <input type="text" id="nome" name="nome" size="50"/>
 		<br/><br/>
-		<label>Idade:</label> <select name="idade" id="idade"/>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-			</select> anos
+		<label>Data Nasc.:</label> <input type="text" id="datanasc" name="datanasc" size="20"/>
 		<br/><br/>
 		<label>Gênero:</label> <select name="genero" id="genero" />
 					<option value="M">Masculino</option>
@@ -69,20 +69,21 @@ label {
 					<option value="ESPECIAL">Especial</option>
 				</select>
 		<br/><br/>
-		<label>Caso:</label> <select name="tipo_especial" id="tipo_especial" />
+		<label>Condição Identificada:</label> <select name="tipo_especial" id="tipo_especial" />
 					<option value="0">N/A</option>
-					<option value="1">Deficiência intelectual</option>
-					<option value="2">Transtornos psiquiátricos</option>
+					<option value="1">Comorbidades</option>
+					<option value="2">Criança em situação de risco</option>
 					<option value="3">Deficiência física</option>
-					<option value="4">Neuropatias</option>
-					<option value="5">Internação hospitalar</option>
-					<option value="6">Estimulação precoce</option>
-					<option value="7">Comorbidades</option>
-					<option value="8">Criança em situação de risco</option>
-					<option value="9">Perda auditiva</option>
-					<option value="10">Transtornos neuropsiquiátricos</option>
+					<option value="4">Deficiência intelectual</option>
+					<option value="5">Estimulação precoce</option>
+					<option value="6">Internação hospitalar</option>
+					<option value="7">Neuropatias</option>
+					<option value="8">Perda auditiva</option>
+					<option value="9">Transtornos neuropsiquiátricos</option>
+					<option value="10">Transtornos psiquiátricos</option>
+					<option value="11">Visão subnormal</option>
 				</select>
-		<br/><br/>
+		<br/><br/><br/>
 		<label>Outros:</label> <input type="text" id="outros" name="outros"/>
 		<input type="hidden" name="jogadas_nivel1" id="jogadas_nivel1"/>
 		<input type="hidden" name="terminei_nivel1" id="terminei_nivel1" value="True"/>

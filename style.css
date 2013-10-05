@@ -6,6 +6,7 @@ body{
 	background: -o-linear-gradient(top, #feffff 52%,#ddf1f9 69%,#a0d8ef 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top, #feffff 52%,#ddf1f9 69%,#a0d8ef 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #feffff 52%,#ddf1f9 69%,#a0d8ef 100%); /* W3C */
+	background-attachment: fixed;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=0 ); /* IE6-9 */
 	height:100%;
 }
