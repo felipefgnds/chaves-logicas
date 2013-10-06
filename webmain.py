@@ -40,7 +40,7 @@ def get_json(request):
 		
 
 @get('/cadastrar_jogador')
-@view('./nivel1.html')
+@view('./opcoes.html')
 def cadastrar_jogador():
 	json = get_json(request.params)
 	try:
