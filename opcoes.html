@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Cadastro</title>
+</head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="application/xml;charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<style type="text/css">
+form{
+	border: 1px solid;
+    margin-left: 230px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-top: 30px;
+    text-align: left;
+    width: 450px;
+}
+
+label {
+	color: #4169E1;
+    font-size: 20px;
+   
+}
+
+#opcoes{
+	width:220px;
+	margin-top:30px;
+}
+
+.opcao_jogo {
+    background-color: #6495ED;
+    border: 1px solid;
+    color: #FFFFFF;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: 200px;
+}
+
+a{
+   color: #FFFFFF;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+</style>
+
+<body>
+	<center>
+	<div id="opcoes">
+	
+		<label>Escolha uma opção de jogo</label>
+		<br/><br/>
+		<a href="/alfabetico?id_jogador={{id_jogador}}"><div class="opcao_jogo">Alfabético</div></a>
+		
+		<a href="/numerico?id_jogador={{id_jogador}}"><div class="opcao_jogo">Numérico</div></a>
+		
+		<a href="/misto?id_jogador={{id_jogador}}"><div class="opcao_jogo">Misto</div></a>
+		
+	</div>
+	</center>
+
+	
+</body>
+</html>

@@ -44,7 +44,11 @@ def get_json(request):
 def cadastrar_jogador():
 	json = get_json(request.params)
 	try:
-		doc_id, doc_rev = database.DRECORD.save(json)
+		doc_id = 0
+		if "id_jogador" in request.params:
+			doc_id = request.params["id_jogador"]
+		else:
+			doc_id, doc_rev = database.DRECORD.save(json)
 		return dict(id_jogador=doc_id)
 	except Exception:
 		return "Erro no Banco de Dados"
