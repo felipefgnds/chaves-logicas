@@ -56,7 +56,7 @@ class Jogo:
 		
 				
 		# Criando as pecas
-		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
+	"""	pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
 		
 		map_pecas = {}
 
@@ -70,7 +70,7 @@ class Jogo:
 		
 		# Atrelando o mapeamento de pecas (informa a casa de uma determinada peca) nas casas do inventario
 		for casa in self.inventario:
-			casa.map_pecas=map_pecas
+			casa.map_pecas=map_pecas """
 		
 	def build_alvos(self, gui):
 		""" """

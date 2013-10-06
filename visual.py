@@ -13,18 +13,18 @@ RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 3
-PEC_V = 3
-CASA = 40
+PEC_H = 10
+PEC_V = 8
+CASA = 78
 
-ALTURA_ALVOS = 2*M_INT + 5*CASA + 2*SEP
+ALTURA_ALVOS = 2*M_INT + 2*CASA + 2*SEP
 ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 
 CASAS_GRID_H = 16
 CASAS_GRID_V = 10
 ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA
 
-LARGURA = 800
+LARGURA = 920
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
 
 LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
@@ -102,7 +102,7 @@ class Visual:
 	def build_inventario(self,gui):
 		"""Desenha o inventario no tabuleiro. O inventario e o local onde ficam as pecas no inicio do jogo"""
 		x = M_EXT
-		y = ALTURA_ALVOS + 2*CASA
+		y = ALTURA_ALVOS + CASA
 		tabuleiro=self.gui.rect(x=x, y=y, width=PEC_H*(CASA+SEP)+2*M_INT, height=ALTURA_INVENTARIO,rx =self.rx,fill="DodgerBlue")
 		self.canvas <= tabuleiro
 
@@ -147,23 +147,23 @@ class Visual:
 		# Criando a base dos alvos
 		x = M_EXT
 		y = M_EXT
-		alvos=self.gui.rect(x=x, y=y, width=13*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx =self.rx,fill="DodgerBlue")
+		alvos=self.gui.rect(x=x, y=y, width=10*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx =self.rx,fill="DodgerBlue")
 		self.canvas <= alvos
 
 		# Criando as casas das letras
 		letras = [self.build_casa(self.canvas,
-                                 x + M_INT + (CASA+SEP)*(c%13),
-                                 y + M_INT + (3*CASA+SEP)*(c//13), "Plum") for c in range(26)]
+                                 x + M_INT + (CASA+SEP)*(c%10),
+                                 y + M_INT + (3*CASA+SEP)*(c//10), "Plum") for c in range(10)]
 								 
-		for casa,letra in zip(letras, LETRAS):
-			build_letra(self,casa,letra)
+		for num,casa in enumerate(letras):
+			build_letra(self,casa,num+1)
 								 
 		y = y + M_INT + CASA + SEP
 								 
 		# Criando as casas vazias
 		casas = [self.build_casa(self.canvas,
-                                 x + M_INT + (CASA+SEP)*(c%13),
-                                 y + (3*CASA+SEP)*(c//13), "Gainsboro","alvo",c) for c in range(26)]
+                                 x + M_INT + (CASA+SEP)*(c%10),
+                                 y + (3*CASA+SEP)*(c//10), "Gainsboro","alvo",c) for c in range(10)]
 								 
 								 
 		return casas
@@ -215,9 +215,9 @@ class Visual:
 		event.data.effectAllowed = "move"
 		
 		
-	def build_letra(self, casa, letra):
+	def build_letra(self, casa, num):
 		""" Desenha as letras"""					
-		imagem=self.gui.image(x=0, y=0, width=40, height=40, href="/img/letras/" + letra +".PNG", draggable=False)
+		imagem=self.gui.image(x=0, y=0, width=80, height=80, href="/img/alvos_numericos/" + str(num) +".PNG", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
 		g <= imagem
