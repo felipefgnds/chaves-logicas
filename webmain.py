@@ -54,6 +54,13 @@ def cadastrar_jogador():
 		return "Erro no Banco de Dados"
 		pass
 		
+
+@get('/numerico')
+@view('./numerico.html')
+def numerico():
+	return dict(id_jogador=request.params["id_jogador"])
+
+		
 @get('/salvar_jogada')
 def salvar_jogada():
 	try:

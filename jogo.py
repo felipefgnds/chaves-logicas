@@ -14,16 +14,17 @@ from casa import Casa
 import random
 
 class Jogo:
+
 	def __init__(self, doc, gui, nivel, id_jogador):
 		"""Constroi as partes do Jogo."""
 		self.build_base(gui)
 		self.jogador=id_jogador
 		
-		req = ajax()
+		"""req = ajax()
 		req.on_complete = on_complete
 		req.set_timeout(5,err_msg)
 		req.open('GET','/get_pecas',False)
-		req.send()
+		req.send()"""
 		
 		if nivel==1 or nivel==5 :
 			self.build_inventario(gui, doc)
@@ -56,7 +57,12 @@ class Jogo:
 		
 				
 		# Criando as pecas
-	"""	pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
+		id_pecas = range(1,81)
+		
+		
+		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in zip(id_pecas, self.inventario)]
+		
+		#pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.inventario)]
 		
 		map_pecas = {}
 
@@ -70,12 +76,15 @@ class Jogo:
 		
 		# Atrelando o mapeamento de pecas (informa a casa de uma determinada peca) nas casas do inventario
 		for casa in self.inventario:
-			casa.map_pecas=map_pecas """
+			casa.map_pecas=map_pecas 
+			
+
 		
 	def build_alvos(self, gui):
 		""" """
 		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_alvos(gui)]
-		
+	
+"""	
 	def build_grid(self, gui):
 		""" """
 		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_grid(gui)]
@@ -99,7 +108,7 @@ class Jogo:
 		
 		# Atrelando o mapeamento de pecas (informa a casa de uma determinada peca) nas casas do inventario
 		for casa in self.deck:
-			casa.map_pecas=map_pecas
+			casa.map_pecas=map_pecas """
 	
 		
  

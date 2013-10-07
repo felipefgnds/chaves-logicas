@@ -17,12 +17,12 @@ PEC_H = 10
 PEC_V = 8
 CASA = 78
 
-ALTURA_ALVOS = 2*M_INT + 2*CASA + 2*SEP
+ALTURA_ALVOS = 4*M_INT + 2*CASA + 2*SEP
 ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 
-CASAS_GRID_H = 16
+"""CASAS_GRID_H = 16
 CASAS_GRID_V = 10
-ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA
+ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA"""
 
 LARGURA = 920
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
@@ -40,8 +40,12 @@ class Visual:
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
 		self.doc = doc
+		
+		self.canvas_alvos=gui.svg(width=LARGURA,height=ALTURA_ALVOS)
+		doc["alvos"] <= self.canvas_alvos
+		
 		self.canvas=gui.svg(width=LARGURA,height=ALTURA)
-		doc["main"] <= self.canvas
+		doc["inventario"] <= self.canvas
 		
 		if nivel==1 or nivel==3:
 			self.rx = 0
@@ -145,13 +149,19 @@ class Visual:
 		"""Desenha a base dos alvos. Ou seja, o lugar onde ficam as casas alvos e as casas com letras"""
 		
 		# Criando a base dos alvos
+		#x = M_EXT
+		#y = M_EXT
+		x=0
+		y=0
+		"""10*(CASA+SEP)+2*M_INT"""
+		alvos=self.gui.rect(x=x, y=y, width=LARGURA, height=ALTURA_ALVOS,rx =self.rx,fill="Black")
+		self.canvas_alvos <= alvos
+		
 		x = M_EXT
 		y = M_EXT
-		alvos=self.gui.rect(x=x, y=y, width=10*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx =self.rx,fill="DodgerBlue")
-		self.canvas <= alvos
 
-		# Criando as casas das letras
-		letras = [self.build_casa(self.canvas,
+		# Criando as casas das imagens
+		letras = [self.build_casa(self.canvas_alvos,
                                  x + M_INT + (CASA+SEP)*(c%10),
                                  y + M_INT + (3*CASA+SEP)*(c//10), "Plum") for c in range(10)]
 								 
@@ -160,8 +170,8 @@ class Visual:
 								 
 		y = y + M_INT + CASA + SEP
 								 
-		# Criando as casas vazias
-		casas = [self.build_casa(self.canvas,
+		# Criando as casas vazias (encaixes)
+		casas = [self.build_casa(self.canvas_alvos,
                                  x + M_INT + (CASA+SEP)*(c%10),
                                  y + (3*CASA+SEP)*(c//10), "Gainsboro","alvo",c) for c in range(10)]
 								 
@@ -189,15 +199,13 @@ class Visual:
 		
 	def build_peca(self, casa, id, cat=None):
 		""" """
-		img = self.get_id_peca(cat)
+		#img = self.get_id_peca(cat)
 		
+		#if img is None:
+		#	return None
 		
-		
-		if img is None:
-			return None
-		
-		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=40, height=40, href="/img/pecas/" + img +".JPG", draggable=True)
-		g = self.gui.g(id="gp" + str(id), img=img, transform="translate(-" + casa.x + ", -" + casa.y + ")")
+		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=CASA, height=CASA, href="/img/pecas/" + str(id) +".PNG", draggable=True)
+		g = self.gui.g(id="gp" + str(id), img=str(id), transform="translate(-" + casa.x + ", -" + casa.y + ")")
 		g_auxiliar = self.gui.g()
 		g_auxiliar.onmouseover = self.aponta_peca
 		g_auxiliar.ondragstart = self.drag_start
@@ -217,7 +225,7 @@ class Visual:
 		
 	def build_letra(self, casa, num):
 		""" Desenha as letras"""					
-		imagem=self.gui.image(x=0, y=0, width=80, height=80, href="/img/alvos_numericos/" + str(num) +".PNG", draggable=False)
+		imagem=self.gui.image(x=0, y=0, width=CASA, height=CASA, href="/img/alvos_numericos/" + str(num) +".PNG", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
 		g <= imagem
