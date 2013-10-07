@@ -17,22 +17,14 @@ class Jogo:
 
 	def __init__(self, doc, gui, nivel, id_jogador):
 		"""Constroi as partes do Jogo."""
+		
 		self.build_base(gui)
 		self.jogador=id_jogador
 		
-		"""req = ajax()
-		req.on_complete = on_complete
-		req.set_timeout(5,err_msg)
-		req.open('GET','/get_pecas',False)
-		req.send()"""
+		self.build_inventario(gui, doc)
+		self.build_alvos(gui)
 		
-		if nivel==1 or nivel==5 :
-			self.build_inventario(gui, doc)
-			self.build_alvos(gui)
 		
-		if nivel==3 :
-			self.build_deck(gui)
-			self.build_grid(gui)
 			
 	
 	def on_complete(req):
@@ -49,15 +41,19 @@ class Jogo:
 		"""Gera a base do tabuleiro do jogo (O fundo do tabuleiro)"""
 		self.base = gui.build_base(gui)
 		
+		
+	
+		
 	def build_inventario(self, gui, doc):
 		""" """
 		
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, "inventario", self.jogador, gui, doc) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, self, "inventario", gui, doc) for casa_visual in gui.build_inventario(gui)]
 		
 				
 		# Criando as pecas
 		id_pecas = range(1,81)
+		random.shuffle(id_pecas)
 		
 		
 		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in zip(id_pecas, self.inventario)]
@@ -82,7 +78,7 @@ class Jogo:
 		
 	def build_alvos(self, gui):
 		""" """
-		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_alvos(gui)]
+		self.alvos = [Casa(casa_visual, self.map_pecas, self, "alvo") for casa_visual in gui.build_alvos(gui)]
 	
 """	
 	def build_grid(self, gui):
@@ -113,5 +109,5 @@ class Jogo:
 		
  
 def main(doc,gui,nivel,id_jogador):
-  print('Chaves Logicas')
-  Jogo(doc,Visual(doc,gui,nivel),nivel,id_jogador)
+	print('Chaves Logicas')
+	Jogo(doc,Visual(doc,gui,nivel),nivel,id_jogador)

@@ -5,16 +5,17 @@ Chaves Logicas - Clase Casa
 """
 from visual import Visual
 import svg
+import random
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas,tipo=None, id_jogador=None, gui=None, doc=None):
+	def __init__(self, casa_visual, map_pecas, jogo, tipo=None, gui=None, doc=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
 		self.map_pecas = map_pecas
 		self.peca=None
-		self.num_pecas_inicial = None
-		self.jogador = id_jogador
+		self.jogador = jogo.jogador
+		self.jogo = jogo
 		self.gui=gui
 		self.doc=doc
 		
@@ -68,12 +69,32 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
-		req.send()
+		#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
+		#req.send()
 		
 		if troca:
-			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
-			req.send()
+			#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
+			#req.send()
+			pass
+			
+		# recriar inventario
+		
+		#casa_atual.doc["inventario"].innerHTML = ""
+		#casa_atual.jogo.build_inventario(casa_atual.gui, casa_atual.doc)
+		
+		id_pecas = range(1,81)
+		random.shuffle(id_pecas)
+		
+		for cont, casa in zip(id_pecas,self.jogo.inventario):
+			#if ('g' + id_peca) != key:
+			#casa = self.map_pecas[key]
+			casa.casa_visual.lastChild.innerHTML = ""
+				
+			nova_peca = casa.gui.build_peca(casa.casa_visual, cont)
+			casa.peca = nova_peca
+			casa.map_pecas[nova_peca.id] = casa
+		
+		
 		
 	def on_complete(req):
 		if req.status==200 or req.status==0:
@@ -96,17 +117,11 @@ class Casa:
 		
 		self.peca = casa.peca
 		casa.peca = None
-		
-		if casa.tipo == "inventario":
-			id = int(casa.num_pecas_inicial) + int(casa.doc["pecas_extras_nv1"].value)
-			nova_peca = casa.gui.build_peca(casa.casa_visual, str(id), self.peca.img.split("_")[0])
-			casa.peca = nova_peca
-			casa.map_pecas[nova_peca.id] = casa
-			casa.doc["pecas_extras_nv1"].value = int(casa.doc["pecas_extras_nv1"].value) + 1
 			
 	# quando soltamos uma peca numa casa ocupada	
 	def troca_peca(self, casa1, casa2):
-		print("troca pecas")
+		print('troca pecas')
+		
 		aux = casa1.peca
 		casa1.peca = None
 		casa1.peca = casa2.peca

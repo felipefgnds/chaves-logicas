@@ -27,10 +27,6 @@ ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA"""
 LARGURA = 920
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
 
-LETRAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 
-			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-			
-CAT_PECAS = ["NUM", "LTR", "PLV", "SLB", "IMG", "COR", "RBSC", "GRTJ", "TRC"]
 
 
 class Visual:
@@ -54,7 +50,7 @@ class Visual:
 				self.rx=20
 	
 		
-	def get_id_peca(self, cat):
+	"""def get_id_peca(self, cat):
 	
 		# Carregando lista de pecas
 		string = doc["pecas"].value
@@ -93,7 +89,7 @@ class Visual:
 		
 		self.doc["pecas"].value = string
 		
-		return peca
+		return peca"""
 				
 			
 		
@@ -137,7 +133,7 @@ class Visual:
 		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=self.rx,fill=cor)
 		
 		if id is not None :
-			id = "c" + LETRAS[id]
+			id = "c" + str(id)
 			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y, id=id)
 		else:
 			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
@@ -161,12 +157,12 @@ class Visual:
 		y = M_EXT
 
 		# Criando as casas das imagens
-		letras = [self.build_casa(self.canvas_alvos,
+		imagens = [self.build_casa(self.canvas_alvos,
                                  x + M_INT + (CASA+SEP)*(c%10),
                                  y + M_INT + (3*CASA+SEP)*(c//10), "Plum") for c in range(10)]
 								 
-		for num,casa in enumerate(letras):
-			build_letra(self,casa,num+1)
+		for num,casa in enumerate(imagens):
+			build_imagem(self,casa,num+1)
 								 
 		y = y + M_INT + CASA + SEP
 								 
@@ -197,15 +193,19 @@ class Visual:
 								 
 		return casas
 		
-	def build_peca(self, casa, id, cat=None):
+	def build_peca(self, casa, img):
 		""" """
 		#img = self.get_id_peca(cat)
 		
 		#if img is None:
 		#	return None
 		
-		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=CASA, height=CASA, href="/img/pecas/" + str(id) +".PNG", draggable=True)
-		g = self.gui.g(id="gp" + str(id), img=str(id), transform="translate(-" + casa.x + ", -" + casa.y + ")")
+		id = int(doc["id_casa"].value) + 1
+		doc["id_casa"].value = id
+		
+		
+		peca=self.gui.image(id="p" + str(id), x=casa.x, y=casa.y, width=CASA, height=CASA, href="/img/pecas/" + str(img) +".PNG", draggable=True)
+		g = self.gui.g(id="gp" + str(id), img=str(img), transform="translate(-" + casa.x + ", -" + casa.y + ")")
 		g_auxiliar = self.gui.g()
 		g_auxiliar.onmouseover = self.aponta_peca
 		g_auxiliar.ondragstart = self.drag_start
@@ -223,7 +223,7 @@ class Visual:
 		event.data.effectAllowed = "move"
 		
 		
-	def build_letra(self, casa, num):
+	def build_imagem(self, casa, num):
 		""" Desenha as letras"""					
 		imagem=self.gui.image(x=0, y=0, width=CASA, height=CASA, href="/img/alvos_numericos/" + str(num) +".PNG", draggable=False)
 		g = self.gui.g()
