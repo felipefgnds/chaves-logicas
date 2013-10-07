@@ -69,18 +69,15 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
-		#req.send()
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
+		req.send()
 		
 		if troca:
-			#req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
-			#req.send()
+			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
+			req.send()
 			pass
 			
 		# recriar inventario
-		
-		#casa_atual.doc["inventario"].innerHTML = ""
-		#casa_atual.jogo.build_inventario(casa_atual.gui, casa_atual.doc)
 		
 		id_pecas = range(1,81)
 		random.shuffle(id_pecas)
