@@ -13,10 +13,15 @@ from visual import Visual
 from casa import Casa
 import random
 
+RANGE = {"NUM":[1,41], "ALF":[41,81], "MIX":[1,81]} 
+
 class Jogo:
 
-	def __init__(self, doc, gui, nivel, id_jogador):
+	def __init__(self, doc, gui, opcao, id_jogador):
 		"""Constroi as partes do Jogo."""
+		
+		self.range = RANGE[opcao]
+		self.opcao = opcao
 		
 		self.build_base(gui)
 		self.jogador=id_jogador
@@ -48,11 +53,11 @@ class Jogo:
 		""" """
 		
 		# Criando as casas do inventario
-		self.inventario = [Casa(casa_visual, None, self, "inventario", gui, doc) for casa_visual in gui.build_inventario(gui)]
+		self.inventario = [Casa(casa_visual, None, self, "inventario", gui) for casa_visual in gui.build_inventario(gui)]
 		
 				
 		# Criando as pecas
-		id_pecas = range(1,81)
+		id_pecas = range(self.range[0],self.range[1])
 		random.shuffle(id_pecas)
 		
 		
@@ -80,34 +85,8 @@ class Jogo:
 		""" """
 		self.alvos = [Casa(casa_visual, self.map_pecas, self, "alvo") for casa_visual in gui.build_alvos(gui)]
 	
-"""	
-	def build_grid(self, gui):
-		""" """
-		self.alvos = [Casa(casa_visual, self.map_pecas, "alvo", self.jogador) for casa_visual in gui.build_grid(gui)]
-		
-	def build_deck(self, gui):
-		""" """
-		# Criando as casas do inventario
-		self.deck = [Casa(casa_visual, None, "inventario", self.jogador, gui) for casa_visual in gui.build_deck(gui)]
-		
-		# Criando as pecas
-		pecas = [gui.build_peca(casa.casa_visual, id) for id,casa in enumerate(self.deck)]
-		
-		map_pecas = {}
-		
-		# Alocando uma peca para cada casa do inventario
-		for peca, casa in zip(pecas, self.deck):
-			map_pecas[peca.id] = casa
-			casa.peca=peca
-			
-		self.map_pecas = map_pecas
-		
-		# Atrelando o mapeamento de pecas (informa a casa de uma determinada peca) nas casas do inventario
-		for casa in self.deck:
-			casa.map_pecas=map_pecas """
-	
 		
  
-def main(doc,gui,nivel,id_jogador):
+def main(doc,gui,opcao,id_jogador):
 	print('Chaves Logicas')
-	Jogo(doc,Visual(doc,gui,nivel),nivel,id_jogador)
+	Jogo(doc,Visual(doc,gui,opcao),opcao,id_jogador)

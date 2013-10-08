@@ -55,9 +55,14 @@ def cadastrar_jogador():
 		pass
 		
 
-@get('/numerico')
-@view('./numerico.html')
-def numerico():
+@get('/tabuleiro')
+@view('./tabuleiro.html')
+def tabuleiro():
+	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["opcao"])
+	
+@get('/opcoes')
+@view('./opcoes.html')
+def opcoes():
 	return dict(id_jogador=request.params["id_jogador"])
 
 		
@@ -65,11 +70,11 @@ def numerico():
 def salvar_jogada():
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
-		jogadas = record["jogadas_nivel1"]
+		jogadas = record["jogadas_" + request.params["opcao"]]
 		if not isinstance(jogadas, list):
 			jogadas = []
 		jogadas.append({'timestamp': str(datetime.now()), 'origem': request.params["origem"], 'destino': request.params["destino"], 'peca': request.params["peca"], 'tipo': request.params["tipo"]})
-		record["jogadas_nivel1"] = jogadas
+		record["jogadas_" + request.params["opcao"]] = jogadas
 		database.DRECORD[request.params["id_jogador"]] = record
 		return "Jogada salva no banco de dados"
 	except Exception:

@@ -8,16 +8,14 @@ import svg
 import random
 
 class Casa:
-	def __init__(self, casa_visual, map_pecas, jogo, tipo=None, gui=None, doc=None):
+	def __init__(self, casa_visual, map_pecas, jogo, tipo=None, gui=None):
 		"""Constroi as partes do Jogo. """
 		self.tipo=tipo
 		self.casa_visual = casa_visual
 		self.map_pecas = map_pecas
 		self.peca=None
-		self.jogador = jogo.jogador
 		self.jogo = jogo
 		self.gui=gui
-		self.doc=doc
 		
 		
 		self.casa_visual.ondragover = self.drag_over
@@ -69,17 +67,17 @@ class Casa:
 		else:
 			destino = self.tipo
 		
-		req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada,False)
+		req.open('GET','/salvar_jogada?id_jogador='+ self.jogo.jogador + '&origem=' + origem + '&destino=' + destino + '&peca=' + self.peca.img + '&tipo=' + jogada + '&opcao=' + self.jogo.opcao,False)
 		req.send()
 		
 		if troca:
-			req.open('GET','/salvar_jogada?id_jogador='+ self.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada,True)
+			req.open('GET','/salvar_jogada?id_jogador='+ self.jogo.jogador + '&origem=' + destino + '&destino=' + origem + '&peca=' + casa_atual.peca.img + '&tipo=' + jogada + '&opcao=' + self.jogo.opcao,True)
 			req.send()
 			pass
 			
 		# recriar inventario
 		
-		id_pecas = range(1,81)
+		id_pecas = range(self.jogo.range[0],self.jogo.range[1])
 		random.shuffle(id_pecas)
 		
 		for cont, casa in zip(id_pecas,self.jogo.inventario):

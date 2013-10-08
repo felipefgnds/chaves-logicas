@@ -13,116 +13,54 @@ RAIO = 5
 M_EXT = 25
 M_INT = 10
 SEP = 5
-PEC_H = 10
-PEC_V = 8
+PEC_H = 1
+PEC_V = 1
 CASA = 78
 
 ALTURA_ALVOS = 4*M_INT + 2*CASA + 2*SEP
-ALTURA_INVENTARIO = 2*M_INT + (PEC_V*CASA) + (SEP*(PEC_V-1))
 
-"""CASAS_GRID_H = 16
-CASAS_GRID_V = 10
-ALTURA_GRID = 2*M_INT + CASAS_GRID_V*CASA"""
+#LARGURA_INVENTARIO = PEC_H*(CASA+SEP)+2*M_INT
 
 LARGURA = 920
-ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA + ALTURA_INVENTARIO 
+ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA 
 
-
+NUM_PECAS = {"NUM":[10,4], "ALF":[10,4], "MIX":[10,8]} 
 
 class Visual:
 	"""Classe responsavel por desenhar o tabuleiro do jogo"""
 	
-	def __init__(self,doc,gui,nivel):
+	def __init__(self,doc,gui,opcao):
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
 		self.doc = doc
 		
+		self.pec_h = NUM_PECAS[opcao][0]
+		self.pec_v = NUM_PECAS[opcao][1]
+		
 		self.canvas_alvos=gui.svg(width=LARGURA,height=ALTURA_ALVOS)
 		doc["alvos"] <= self.canvas_alvos
 		
-		self.canvas=gui.svg(width=LARGURA,height=ALTURA)
+		self.canvas=gui.svg(width=LARGURA,height=ALTURA + 2*M_INT + (self.pec_v*CASA) + (SEP*(self.pec_v-1)))
 		doc["inventario"] <= self.canvas
 		
-		if nivel==1 or nivel==3:
-			self.rx = 0
-		else : 
-			if nivel==5 :
-				self.rx=20
-	
-		
-	"""def get_id_peca(self, cat):
-	
-		# Carregando lista de pecas
-		string = doc["pecas"].value
-		string = string.split(";")
-			
-		pecas = {}
-		for str in string:
-			str = str.split("|")
-			str_pecas = str[1].split(",")
-			if str_pecas != "":
-				pecas[str[0]] = str_pecas
-			else:
-				pecas[str[0]] = []
-				
-		if cat is None:
-			cat = CAT_PECAS[random.randint(0,len(pecas))]
-		
-		if pecas[cat] == []:
-			return None
-			
-		peca =  pecas[cat][random.randint(0,len(pecas[cat]))]
-		pecas[cat].remove(peca)
-		
-		# Recriando a string com as pecas
-		string = ""
-		for categoria in pecas.keys():
-			string += categoria + "|"
-			
-			if len(pecas[categoria]) > 0:
-				for str_peca in pecas[categoria]:
-					#print("PECA = [" + str_peca + "]")
-					string += str_peca + ","
-				string = string[:-1]
-			string += ";"
-		string = string[:-1]
-		
-		self.doc["pecas"].value = string
-		
-		return peca"""
-				
-			
+		self.rx=0
 		
 		
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
-		base=self.gui.rect(x=0, y= 0, width=LARGURA, height=ALTURA,rx=RAIO,fill="PaleTurquoise")
+		base=self.gui.rect(x=0, y= 0, width=LARGURA, height=ALTURA + 2*M_INT + (self.pec_v*CASA) + (SEP*(self.pec_v-1)),rx=RAIO,fill="PaleTurquoise")
 		self.canvas <= base
 	
 	def build_inventario(self,gui):
 		"""Desenha o inventario no tabuleiro. O inventario e o local onde ficam as pecas no inicio do jogo"""
 		x = M_EXT
 		y = ALTURA_ALVOS + CASA
-		tabuleiro=self.gui.rect(x=x, y=y, width=PEC_H*(CASA+SEP)+2*M_INT, height=ALTURA_INVENTARIO,rx =self.rx,fill="DodgerBlue")
+		tabuleiro=self.gui.rect(x=x, y=y, width=self.pec_h*(CASA+SEP)+2*M_INT, height=2*M_INT + (self.pec_v*CASA) + (SEP*(self.pec_v-1)),rx =self.rx,fill="DodgerBlue")
 		self.canvas <= tabuleiro
 
 		casas = [self.build_casa(self.canvas,
-                                 x + M_INT + (CASA+SEP)*(c%PEC_H),
-                                 y + M_INT + (CASA+SEP)*(c//PEC_H), "Gainsboro") for c in range(PEC_H * PEC_V)]
-								 
-								 
-		return casas
-		
-	def build_deck(self,gui):
-		"""Desenha o deck no tabuleiro. O deck e o local onde ficam as pecas no nivel 3"""
-		x = M_EXT
-		y = ALTURA_GRID + CASA
-		deck=self.gui.rect(x=x, y=y, width=CASAS_GRID_H*(CASA+SEP)+2*M_INT, height=CASA+2*M_INT,rx = RAIO,fill="DodgerBlue")
-		self.canvas <= deck
-
-		casas = [self.build_casa(self.canvas,
-									x + M_INT + (CASA+SEP)*(c%CASAS_GRID_H),
-									y + M_INT + (CASA*SEP)*(c//CASAS_GRID_H), "Gainsboro") for c in range(CASAS_GRID_H)]
+                                 x + M_INT + (CASA+SEP)*(c%self.pec_h),
+                                 y + M_INT + (CASA+SEP)*(c//self.pec_h), "Gainsboro") for c in range(self.pec_h * self.pec_v)]
 								 
 								 
 		return casas
@@ -174,24 +112,6 @@ class Visual:
 								 
 		return casas
 			
-	def build_grid(self,gui):
-		"""Desenha o grid onde ficam as casas alvos"""
-		
-		# Criando a base invisivel do grid
-		x = M_EXT
-		y = M_EXT
-		alvos=self.gui.rect(x=x, y=y, width=CASAS_GRID_H*CASA+2*M_INT, height=ALTURA_GRID,rx = RAIO,fill="DodgerBlue")
-		self.canvas <= alvos
-								 
-		y = M_EXT + M_INT;
-								 
-		# Criando as casas vazias
-		casas = [self.build_casa(self.canvas,
-                                 x + M_INT + (CASA)*(c%CASAS_GRID_H),
-                                 y + (CASA)*(c//CASAS_GRID_H), "Gainsboro","alvo",c) for c in range(CASAS_GRID_V*CASAS_GRID_H)]
-								 
-								 
-		return casas
 		
 	def build_peca(self, casa, img):
 		""" """
