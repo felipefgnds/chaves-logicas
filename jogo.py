@@ -13,7 +13,9 @@ from visual import Visual
 from casa import Casa
 import random
 
-RANGE = {"NUM":[[1,21],[21,41]], "ALF":[41,81], "MIX":[1,81]} 
+RANGE = {"NUM":[[1,21],[21,41]], 
+         "ALF":[[41,61],[61,81]], 
+		 "MIX":[[1,41],[41,81]]} 
 
 class Jogo:
 
