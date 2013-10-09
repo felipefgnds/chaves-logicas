@@ -13,14 +13,14 @@ from visual import Visual
 from casa import Casa
 import random
 
-RANGE = {"NUM":[1,41], "ALF":[41,81], "MIX":[1,81]} 
+RANGE = {"NUM":[[1,21],[21,41]], "ALF":[41,81], "MIX":[1,81]} 
 
 class Jogo:
 
-	def __init__(self, doc, gui, opcao, id_jogador):
+	def __init__(self, doc, gui, opcao, id_jogador, tela):
 		"""Constroi as partes do Jogo."""
 		
-		self.range = RANGE[opcao]
+		self.range = RANGE[opcao][tela]
 		self.opcao = opcao
 		
 		self.build_base(gui)
@@ -87,6 +87,6 @@ class Jogo:
 	
 		
  
-def main(doc,gui,opcao,id_jogador):
+def main(doc,gui,opcao,id_jogador, tela):
 	print('Chaves Logicas')
-	Jogo(doc,Visual(doc,gui,opcao),opcao,id_jogador)
+	Jogo(doc,Visual(doc,gui,opcao, tela),opcao,id_jogador, tela)

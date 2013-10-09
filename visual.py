@@ -15,7 +15,7 @@ M_INT = 10
 SEP = 5
 PEC_H = 1
 PEC_V = 1
-CASA = 78
+CASA = 120
 
 ALTURA_ALVOS = 4*M_INT + 2*CASA + 2*SEP
 
@@ -24,18 +24,25 @@ ALTURA_ALVOS = 4*M_INT + 2*CASA + 2*SEP
 LARGURA = 920
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA 
 
-NUM_PECAS = {"NUM":[10,4], "ALF":[10,4], "MIX":[10,8]} 
+NUM_PECAS = {"NUM":[5,4], "ALF":[10,4], "MIX":[10,8]} 
+
+ALVOS = {"NUM":[["BL1","2","3", "4", "5"],["BL1","7","8", "9", "10"]], 
+         "ALF":[["5","10","3", "7", "8"],["2","4","1", "9", "6"]],
+		 "MIX":[["5","14","3", "2", "1"],["10","9","8", "7", "6"]]} 
 
 class Visual:
 	"""Classe responsavel por desenhar o tabuleiro do jogo"""
 	
-	def __init__(self,doc,gui,opcao):
+	def __init__(self,doc,gui,opcao, tela):
 		"""Desenha o tabuleiro completo do jogo"""
 		self.gui = gui
 		self.doc = doc
 		
 		self.pec_h = NUM_PECAS[opcao][0]
 		self.pec_v = NUM_PECAS[opcao][1]
+		
+		self.opcao = opcao
+		self.tela = tela
 		
 		self.canvas_alvos=gui.svg(width=LARGURA,height=ALTURA_ALVOS)
 		doc["alvos"] <= self.canvas_alvos
@@ -71,7 +78,7 @@ class Visual:
 		casa = self.gui.rect(x=0, y=0, width=CASA, height=CASA,rx=self.rx,fill=cor)
 		
 		if id is not None :
-			id = "c" + str(id)
+			id = str(ALVOS[self.opcao][int(self.tela)][id-1])
 			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y, id=id)
 		else:
 			g = self.gui.g(transform = "translate(%d %d)"%(x,y), x=x, y=y)
@@ -97,7 +104,7 @@ class Visual:
 		# Criando as casas das imagens
 		imagens = [self.build_casa(self.canvas_alvos,
                                  x + M_INT + (CASA+SEP)*(c%10),
-                                 y + M_INT + (3*CASA+SEP)*(c//10), "Plum") for c in range(10)]
+                                 y + M_INT + (3*CASA+SEP)*(c//10), "Plum") for c in range(5)]
 								 
 		for num,casa in enumerate(imagens):
 			build_imagem(self,casa,num+1)
@@ -107,7 +114,7 @@ class Visual:
 		# Criando as casas vazias (encaixes)
 		casas = [self.build_casa(self.canvas_alvos,
                                  x + M_INT + (CASA+SEP)*(c%10),
-                                 y + (3*CASA+SEP)*(c//10), "Gainsboro","alvo",c) for c in range(10)]
+                                 y + (3*CASA+SEP)*(c//10), "Gainsboro","alvo",c) for c in range(5)]
 								 
 								 
 		return casas
@@ -145,7 +152,7 @@ class Visual:
 		
 	def build_imagem(self, casa, num):
 		""" Desenha as letras"""					
-		imagem=self.gui.image(x=0, y=0, width=CASA, height=CASA, href="/img/alvos_numericos/" + str(num) +".PNG", draggable=False)
+		imagem=self.gui.image(x=0, y=0, width=CASA, height=CASA, href="/img/alvos/" + str(ALVOS[self.opcao][int(self.tela)][num-1]) +".PNG", draggable=False)
 		g = self.gui.g()
 		g.ondragstart = self.no_drag
 		g <= imagem
