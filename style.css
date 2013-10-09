@@ -11,16 +11,29 @@ body{
 	height:100%;
 }
 
-.barra-lateral {
+.barra-lateral-item {
 		float:right;
 		font-size:20px;
-		width:170px;
+		width:240px;
 		padding:5px;
 		margin-top:10px;
+		text-align:center;
+		border:1px dotted;
 		
 }
 
-.barra-lateral a{
+#barra-lateral {
+		float:right;
+		font-size:20px;
+		width:240px;
+		padding:5px;
+		margin-top:10px;
+		text-align:center;
+		margin-right: 10px;
+		
+}
+
+#barra-lateral a{
 		text-decoration:none;
 		color:black;
 }
@@ -28,4 +41,11 @@ body{
 #alvos{
 	position:fixed;
 }
+
+#tela{
+	border:1px solid;
+	width: 980px;
+	float:left;
+}
+	
 	

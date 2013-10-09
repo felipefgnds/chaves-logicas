@@ -21,12 +21,12 @@ ALTURA_ALVOS = 4*M_INT + 2*CASA + 2*SEP
 
 #LARGURA_INVENTARIO = PEC_H*(CASA+SEP)+2*M_INT
 
-LARGURA = 920
+LARGURA = 700
 ALTURA = 2*M_EXT + ALTURA_ALVOS + 2*CASA 
 
-NUM_PECAS = {"NUM":[5,4], "ALF":[10,4], "MIX":[10,8]} 
+NUM_PECAS = {"NUM":[5,16], "ALF":[10,4], "MIX":[10,8]} 
 
-ALVOS = {"NUM":[["BL1","2","3", "4", "5"],["BL1","7","8", "9", "10"]], 
+ALVOS = {"NUM":[["BL1","2","3", "9", "5"],["BL1","7","8", "9", "10"]], 
          "ALF":[["5","10","3", "7", "8"],["2","4","1", "9", "6"]],
 		 "MIX":[["5","14","3", "2", "1"],["10","9","8", "7", "6"]]} 
 
@@ -56,7 +56,7 @@ class Visual:
 	def build_base(self,gui):
 		"""Desenha a base (fundo do tabuleiro)"""
 		base=self.gui.rect(x=0, y= 0, width=LARGURA, height=ALTURA + 2*M_INT + (self.pec_v*CASA) + (SEP*(self.pec_v-1)),rx=RAIO,fill="PaleTurquoise")
-		self.canvas <= base
+		#self.canvas <= base
 	
 	def build_inventario(self,gui):
 		"""Desenha o inventario no tabuleiro. O inventario e o local onde ficam as pecas no inicio do jogo"""
@@ -92,14 +92,14 @@ class Visual:
 		# Criando a base dos alvos
 		#x = M_EXT
 		#y = M_EXT
-		x=0
+		x=M_EXT
 		y=0
 		"""10*(CASA+SEP)+2*M_INT"""
-		alvos=self.gui.rect(x=x, y=y, width=LARGURA, height=ALTURA_ALVOS,rx =self.rx,fill="Black")
+		alvos=self.gui.rect(x=x, y=y, width=self.pec_h*(CASA+SEP)+2*M_INT, height=ALTURA_ALVOS,rx =self.rx,fill="Black")
 		self.canvas_alvos <= alvos
 		
 		x = M_EXT
-		y = M_EXT
+		y = M_INT
 
 		# Criando as casas das imagens
 		imagens = [self.build_casa(self.canvas_alvos,
@@ -108,6 +108,7 @@ class Visual:
 								 
 		for num,casa in enumerate(imagens):
 			build_imagem(self,casa,num+1)
+			
 								 
 		y = y + M_INT + CASA + SEP
 								 

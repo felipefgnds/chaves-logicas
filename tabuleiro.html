@@ -15,38 +15,39 @@ main(doc,svg,"NUM",id_jogador,0)
 <meta http-equiv="content-type" content="application/xml;charset=utf-8"/>
 
 <body onLoad="brython(1)">
-	<!--<div class="barra-lateral">
-		<div class="barra-lateral">
-			<a href="/index.html">- Inicial</a>
-			<br/>
-			<a href="/cadastro.html">- Cadastro</a>
-		</div>
-		
+<div id="tela">	
+
+	
+	<div id="alvos">
+	<div id="barra-lateral">
+		TELA 1 DE 2
+	
 		<a href="/analisar_nivel1?id_jogador={{id_jogador}}&terminei=True">
-		<div class="barra-lateral">
+		<div class="barra-lateral-item">
 			<img src="/img/ok.png" width="20px" height="20px"> Terminei e acho que estou certo
 		</div>
 		</a>
 		
 		<a href="/analisar_nivel1?id_jogador={{id_jogador}}&terminei=False">
-		<div class="barra-lateral">
+		<div class="barra-lateral-item">
 			<img src="/img/ok.png" width="20px" height="20px"> Terminei, mas acho que está errado	
 		</div>
 		</a>
 		
 		<a href="/index.html">
-		<div class="barra-lateral">
-			<img src="/img/nok.png" width="20px" height="20px"> Desisto!
+		<div class="barra-lateral-item">
+			<img src="/img/nok.png" width="20px" height="20px"> Desisto!<br/><br/>
 		</div>
 		</a>
-	</div>-->
+	</div>
 	
-	<div id="alvos"></div>
+	</div>
 	
 	<div id="inventario"></div>
 	
 	<input type="hidden" name="id_casa" id="id_casa" value="0"/>
 	<input type="hidden" name="pecas" id="pecas" value="0"/>
+</div>
 	
 </body>
 </html>
