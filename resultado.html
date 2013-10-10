@@ -22,15 +22,18 @@ label {
 
 <body>
 
+<div id="resultado">
 	<form action="/opcoes" method="GET">
 		<br/><br/>
-		Pontuação de {{nome}}
+		<h1>Pontuação de {{nome}}</h1>
 		<br/><br/>
-		* Por peças escolhidas: {{pontuacao_pecas}}<br/>
-		* Por correlação: {{pontuacao_encaixe}}
+		* Por peças escolhidas: <font color="red">{{pontuacao_pecas}}</font>
+		<br/><br/>
+		* Por correlação: <font color="red">{{pontuacao_encaixe}}</font>
 		<br/><br/>
 		<input type="hidden" name="id_jogador" id="id_jogador" value="{{id_jogador}}"/>
-		<input type="submit" value="SALVAR">
+		<input type="submit" value="OK">
 	</form>
+</div>
 </body>
 </html>
