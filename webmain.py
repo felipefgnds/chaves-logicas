@@ -119,7 +119,7 @@ def get_pecas():
 #@view('./nivel2.html')		
 def contar_pontuacao():
 	
-	try:
+		#try:
 		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_" + request.params["opcao"]]
 		
@@ -162,11 +162,11 @@ def contar_pontuacao():
 		
 		return string
 		
-		return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
+		#return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
 		
-	except Exception:
-		return "Erro no Banco de Dados"
-		pass
+		#except Exception:
+		#return "Erro no Banco de Dados"
+		#pass
 
 		
 @post("/salvar_conte_me")
