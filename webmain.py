@@ -185,6 +185,50 @@ def salvar_conte_me():
 	#	return "Erro no Banco de Dados"
 	#	pass
 	
+	
+{
+   "1": {
+       "2": 3,
+       "self": 3
+   },
+   "2": {
+       "self": 10,
+       "BL1": 2
+   },
+   "3": {
+       "5": 1,
+       "self": 5
+   }
+}
+	
+	
+@get("/crivo")
+def get_crivo():
+
+	crivo = database.DRECORD["_CRIVO"]
+	
+	string = "<table><tr><td>Peca</td><td>Pontuacao</td><td>Encaixe</td><td>Pontuacao</td></tr>"
+	
+	for peca in crivo:
+		for key in crivo[peca]:
+			if key == "self":
+				string += "<td>" + peca + "</td><td>" + crivo[peca][key] + "</td>"
+			else:
+				string += "<td>" + key + "</td><td>" + crivo[peca][key] + "</td>"
+				
+		string += "</tr>"
+				
+	string += "</table>"
+	
+	return string
+	
+	
+					
+	
+	
+
+	
+	
 
 
 if __name__ == "__main__":
