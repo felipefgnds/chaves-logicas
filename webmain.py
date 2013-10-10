@@ -153,7 +153,7 @@ def contar_pontuacao():
 		for key in casas.keys():
 			if casas[key] != 0:
 				peca = pecas[str(casas[key])]
-				pontuacao_pecas += intval(peca["self"])
+				pontuacao_pecas += int(peca["self"])
 				if key in peca:
 					pontuacao_encaixe += int(peca[key])
 				
