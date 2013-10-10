@@ -211,6 +211,21 @@ def get_crivo():
 	
 	return string
 	
+	
+@get("/crivo_json")
+def get_crivo_json():
+
+	pecas = range(1,71)
+	
+	string = "<table><tr>{</tr>"
+	
+	for peca in crivo:
+		string += '<tr>"'+peca+'": {</tr> <tr>"_":x,</tr><tr>"BLX":x</tr> <tr>},<tr/>'
+				
+	string += "}</table>"
+	
+	return string
+	
 	#return dict(crivo=string)
 	
 	
