@@ -58,7 +58,7 @@ def cadastrar_jogador():
 @get('/tabuleiro')
 @view('./tabuleiro.html')
 def tabuleiro():
-	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["opcao"])
+	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["opcao"], tela=request.params["tela"])
 	
 @get('/opcoes')
 @view('./opcoes.html')
