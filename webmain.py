@@ -68,7 +68,7 @@ def opcoes():
 @get('/conte_me')
 @view('./conte_me.html')	
 def conte_me():
-	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["id_jogador"], terminei=request.params["id_jogador"])
+	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["opcao"], terminei=request.params["terminei"])
 
 		
 @get('/salvar_jogada')
@@ -120,7 +120,7 @@ def get_pecas():
 def contar_pontuacao():
 	
 		#try:
-		record = database.DRECORD[request.params["id_jogador"]]
+		record = database.DRECORD[request.params["opcao"]]
 		jogadas = record["jogadas_" + request.params["opcao"]]
 		
 		record["conte_me_" + request.params["opcao"]] = request.params["conte_me"]
