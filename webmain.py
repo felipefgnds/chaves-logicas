@@ -217,12 +217,12 @@ def get_crivo_json():
 
 	pecas = range(1,71)
 	
-	string = "<table><tr>{</tr>"
+	string = "{</br><br/>"
 	
 	for peca in pecas:
-		string += '<tr>"'+ str(peca) +'": {</tr> <tr>"_":x,</tr><tr>"BLX":<br/>x</tr> <tr>},</tr>'
+		string += '"'+ str(peca) +'": {<br/>&nbsp;&nbsp;&nbsp;"_":x,<br/>&nbsp;&nbsp;&nbsp;"BLX":x</br>&nbsp;&nbsp;&nbsp;},<br/><br/>'
 				
-	string += "}</table>"
+	string += "}"
 	
 	return string
 	
