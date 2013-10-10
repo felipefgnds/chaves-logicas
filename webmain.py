@@ -219,7 +219,7 @@ def get_crivo_json():
 	
 	string = "<table><tr>{</tr>"
 	
-	for peca in crivo:
+	for peca in pecas:
 		string += '<tr>"'+peca+'": {</tr> <tr>"_":x,</tr><tr>"BLX":x</tr> <tr>},<tr/>'
 				
 	string += "}</table>"
