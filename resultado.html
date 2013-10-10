@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Resultado</title>
+</head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="application/xml;charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/style.css">
+
+<style type="text/css">
+form{
+	text-align:left;
+	margin-left:300px;
+}
+
+label {
+    float: left;
+    width: 90px;
+}
+
+</style>
+
+<body>
+
+	<form action="/opcoes" method="GET">
+		<br/><br/>
+		Pontuação de {{nome}}
+		<br/><br/>
+		* Por peças escolhidas: {{pontuacao_pecas}}<br/>
+		* Por correlação: {{pontuaçao_encaixe}}
+		<br/><br/>
+		<input type="hidden" name="id_jogador" id="id_jogador" value="{{id_jogador}}"/>
+		<input type="submit" value="SALVAR">
+	</form>
+</body>
+</html>

@@ -116,7 +116,7 @@ def get_pecas():
 		pass
 
 @get('/contar_pontuacao')
-#@view('./nivel2.html')		
+@view('./resultado.html')		
 def contar_pontuacao():
 	
 		#try:
@@ -142,8 +142,6 @@ def contar_pontuacao():
 			
 			if jogada["destino"] != "inventario":
 				casas[jogada["destino"]] = jogada["peca"]
-				
-		result = {"PRE":0, "SIL":0, "ALF":0}
 		
 		#string = ""
 			
@@ -160,9 +158,12 @@ def contar_pontuacao():
 		
 		string = "ENCAIXE = [" + str(pontuacao_encaixe) + "] <br/><br/> PECAS = [" + str(pontuacao_pecas) + "]"
 		
-		return string
+		#return string
 		
-		#return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
+		return dict(nome=record["nome"], 
+								id_jogador=request.params["id_jogador"],
+								pontuacao_pecas=pontuacao_pecas,
+								pontuacao_encaixe=pontuacao_encaixe)
 		
 		#except Exception:
 		#return "Erro no Banco de Dados"
