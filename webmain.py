@@ -158,7 +158,7 @@ def contar_pontuacao():
 					pontuacao_encaixe += int(peca[key])
 				
 		
-		string = "ENCAIXE = [" + pontuacao_encaixe + "] <br/><br/> PECAS = [" + pontuacao_pecas + "]"
+		string = "ENCAIXE = [" + str(pontuacao_encaixe) + "] <br/><br/> PECAS = [" + str(pontuacao_pecas) + "]"
 		
 		return string
 		
