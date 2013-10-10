@@ -191,7 +191,6 @@ def salvar_conte_me():
 	
 	
 @get("/crivo")
-@view('./crivo.html')
 def get_crivo():
 
 	record = database.DRECORD["_CRIVO"]
@@ -210,7 +209,9 @@ def get_crivo():
 				
 	string += "</table>"
 	
-	return dict(crivo=string)
+	return string
+	
+	#return dict(crivo=string)
 	
 	
 					
