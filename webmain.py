@@ -220,7 +220,7 @@ def get_crivo_json():
 	string = "{</br><br/>"
 	
 	for peca in pecas:
-		string += '"'+ str(peca) +'": {<br/>&nbsp;&nbsp;&nbsp;"_":x,<br/>&nbsp;&nbsp;&nbsp;"BLX":x</br>&nbsp;&nbsp;&nbsp;},<br/><br/>'
+		string += '"'+ str(peca) +'": {<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"_" : x,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"BLX" : x</br>},<br/><br/>'
 				
 	string += "}"
 	
