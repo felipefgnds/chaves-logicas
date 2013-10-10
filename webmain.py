@@ -172,6 +172,7 @@ def contar_pontuacao():
 
 		
 @post("/salvar_conte_me")
+@view('./resultado.html')
 def salvar_conte_me():
 	#try:
 	record = database.DRECORD[request.params["id_jogador"]]
@@ -190,6 +191,7 @@ def salvar_conte_me():
 	
 	
 @get("/crivo")
+@view('./crivo.html')
 def get_crivo():
 
 	record = database.DRECORD["_CRIVO"]
@@ -199,7 +201,7 @@ def get_crivo():
 	
 	for peca in crivo.keys():
 		for key in dict(crivo[peca]).keys():
-			if key == "self":
+			if key == "_":
 				string += "<td>" + peca + "</td><td>" + str(crivo[peca][key]) + "</td>"
 			else:
 				string += "<td>" + key + "</td><td>" + str(crivo[peca][key]) + "</td>"
@@ -208,7 +210,7 @@ def get_crivo():
 				
 	string += "</table>"
 	
-	return string
+	return dict(crivo=string)
 	
 	
 					
