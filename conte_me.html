@@ -22,7 +22,7 @@ label {
 
 <body>
 
-	<form action="/salvar_conte_me_nivel1" method="POST">
+	<form action="/contar_pontuacao" method="GET">
 		<br/><br/>
 		<b>Conte-me o que você fez</b>
 		<br/><br/>
@@ -31,6 +31,8 @@ label {
 		<textarea id="conte_me_nivel1" name="conte_me_nivel1" rows="20" cols="50"/></textarea>
 		<br/><br/>
 		<input type="hidden" name="id_jogador" id="id_jogador" value="{{id_jogador}}"/>
+		<input type="hidden" name="terminei" id="terminei" value="{{terminei}}"/>
+		<input type="hidden" name="opcao" id="opcao" value="{{opcao}}"/>
 		<input type="submit" value="SALVAR">
 	</form>
 </body>

@@ -8,7 +8,39 @@
 <script type="text/python">
 import svg
 id_jogador = "{{id_jogador}}"
-main(doc,svg,"NUM",id_jogador,0)
+main(doc,svg,"{{opcao}}",id_jogador,{{tela}})
+
+if {{tela}}==1:
+
+	doc["barra-lateral"].innerHTML = 'FASE 2 DE 2<br/><br/>
+	
+		<a href="/conte_me?id_jogador={{id_jogador}}&terminei=True&opcao={{opcao}}">
+		<div class="barra-lateral-item">
+		<img src="/img/ok.png" width="20px" height="20px"> Terminei e acho que estou certo
+		</div>
+		</a>
+		
+		<a href="/conte_me?id_jogador={{id_jogador}}&terminei=False&opcao={{opcao}}">
+		<div class="barra-lateral-item">
+		<img src="/img/ok.png" width="20px" height="20px"> Terminei, mas acho que está errado	
+		</div>
+		</a>
+		
+		<a href="/index.html">
+		<div class="barra-lateral-item">
+		<img src="/img/nok.png" width="20px" height="20px"> Desisto!<br/><br/>
+		</div>
+		</a>'
+else:
+	doc["barra-lateral"].innerHTML = 'FASE 1 DE 2<br/><br/>
+	
+		<a href="/tabuleiro?id_jogador={{id_jogador}}&opcao={{opcao}}&tela=1">
+		<div class="barra-lateral-item">
+		<img src="/img/ok.png" width="20px" height="20px"> Ir para fase 2<br/><br/>
+		</div>
+		</a>'
+
+
 </script>
 </head>
 <meta charset="utf-8">
@@ -19,28 +51,7 @@ main(doc,svg,"NUM",id_jogador,0)
 
 	
 	<div id="alvos">
-	<div id="barra-lateral">
-		TELA 1 DE 2
-	
-		<a href="/analisar_nivel1?id_jogador={{id_jogador}}&terminei=True">
-		<div class="barra-lateral-item">
-			<img src="/img/ok.png" width="20px" height="20px"> Terminei e acho que estou certo
-		</div>
-		</a>
-		
-		<a href="/analisar_nivel1?id_jogador={{id_jogador}}&terminei=False">
-		<div class="barra-lateral-item">
-			<img src="/img/ok.png" width="20px" height="20px"> Terminei, mas acho que está errado	
-		</div>
-		</a>
-		
-		<a href="/index.html">
-		<div class="barra-lateral-item">
-			<img src="/img/nok.png" width="20px" height="20px"> Desisto!<br/><br/>
-		</div>
-		</a>
-	</div>
-	
+		<div id="barra-lateral"></div>
 	</div>
 	
 	<div id="inventario"></div>

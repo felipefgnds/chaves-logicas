@@ -65,6 +65,11 @@ def tabuleiro():
 def opcoes():
 	return dict(id_jogador=request.params["id_jogador"])
 
+@get('/conte_me')
+@view('./conte_me.html')	
+def conte_me():
+	return dict(id_jogador=request.params["id_jogador"], opcao=request.params["id_jogador"], terminei=request.params["id_jogador"])
+
 		
 @get('/salvar_jogada')
 def salvar_jogada():
@@ -110,22 +115,23 @@ def get_pecas():
 		return "Erro no Banco de Dados"
 		pass
 
-@get('/analisar_nivel1')
-@view('./nivel2.html')		
-def analisar_nivel1():
+@get('/contar_pontuacao')
+#@view('./nivel2.html')		
+def contar_pontuacao():
 	
 	try:
 		record = database.DRECORD[request.params["id_jogador"]]
-		jogadas = record["jogadas_nivel1"]
+		jogadas = record["jogadas_" + request.params["opcao"]]
 		
-		record["terminei_nivel1"] = request.params["terminei"]
+		record["conte_me_" + request.params["opcao"]] = request.params["conte_me"]
+		record["terminei_" + request.params["opcao"]] = request.params["terminei"]
 
 		database.DRECORD[request.params["id_jogador"]] = record
 		
 		if not isinstance(jogadas, list):
 			return "Não há jogadas cadastradas"
 			
-		pecas = database.DRECORD["_PECAS"]
+		pecas = database.DRECORD["_CRIVO"]
 		
 		casas = {}
 		
@@ -141,18 +147,20 @@ def analisar_nivel1():
 		
 		#string = ""
 			
+		pontuacao_encaixe = 0
+		pontuacao_pecas = 0
 		
 		for key in casas.keys():
 			if casas[key] != 0:
 				peca = pecas[str(casas[key])]
+				pontuacao_pecas += intval(peca["self"])
 				if key in peca:
-					result[peca[key]] += 1
+					pontuacao_encaixe += int(peca[key])
 				
 		
-		#for key in result.keys():
-		#	string += key + " = " + str(result[key]) + "<br/>"
+		string = "ENCAIXE = [" + pontuacao_encaixe + "] <br/><br/> PECAS = [" + pontuacao_pecas + "]"
 		
-		#return string
+		return string
 		
 		return dict(nome=record["nome"], id_jogador=request.params["id_jogador"])
 		
@@ -161,12 +169,14 @@ def analisar_nivel1():
 		pass
 
 		
-@post("/salvar_conte_me_nivel1")
-def salvar_conte_me_nivel1():
+@post("/salvar_conte_me")
+def salvar_conte_me():
 	#try:
 	record = database.DRECORD[request.params["id_jogador"]]
-	conte_me = record["conte_me_nivel1"]
-	record["conte_me_nivel1"] = request.params["conte_me_nivel1"]
+	
+	record["conte_me_" + request.params["opcao"]] = request.params["conte_me"]
+	record["terminei_" + request.params["opcao"]] = request.params["terminei"]
+	
 	database.DRECORD[request.params["id_jogador"]] = record
 		
 	return "Ok."
