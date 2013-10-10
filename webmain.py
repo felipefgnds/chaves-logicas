@@ -120,7 +120,7 @@ def get_pecas():
 def contar_pontuacao():
 	
 		#try:
-		record = database.DRECORD[request.params["opcao"]]
+		record = database.DRECORD[request.params["id_jogador"]]
 		jogadas = record["jogadas_" + request.params["opcao"]]
 		
 		record["conte_me_" + request.params["opcao"]] = request.params["conte_me"]
