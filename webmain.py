@@ -132,6 +132,7 @@ def contar_pontuacao():
 			return "Não há jogadas cadastradas"
 			
 		pecas = database.DRECORD["_CRIVO"]
+		pecas = pecas["pecas"]
 		
 		casas = {}
 		
@@ -185,27 +186,14 @@ def salvar_conte_me():
 	#	return "Erro no Banco de Dados"
 	#	pass
 	
-	
-{
-   "1": {
-       "2": 3,
-       "self": 3
-   },
-   "2": {
-       "self": 10,
-       "BL1": 2
-   },
-   "3": {
-       "5": 1,
-       "self": 5
-   }
-}
+
 	
 	
 @get("/crivo")
 def get_crivo():
 
-	crivo = database.DRECORD["_CRIVO"]
+	record = database.DRECORD["_CRIVO"]
+	crivo = record["pecas"]
 	
 	string = "<table><tr><td>Peca</td><td>Pontuacao</td><td>Encaixe</td><td>Pontuacao</td></tr>"
 	
