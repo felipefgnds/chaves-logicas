@@ -209,8 +209,8 @@ def get_crivo():
 	
 	string = "<table><tr><td>Peca</td><td>Pontuacao</td><td>Encaixe</td><td>Pontuacao</td></tr>"
 	
-	for peca in crivo:
-		for key in crivo[peca]:
+	for peca in crivo.keys():
+		for key in crivo[peca].keys():
 			if key == "self":
 				string += "<td>" + peca + "</td><td>" + str(crivo[peca][key]) + "</td>"
 			else:
