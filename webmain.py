@@ -215,7 +215,7 @@ def get_crivo():
 @get("/crivo_json")
 def get_crivo_json():
 
-	pecas = range(1,71)
+	pecas = range(71,141)
 	
 	string = "{</br><br/>"
 	
